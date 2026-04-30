@@ -1,43 +1,54 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
-import Home from './pages/public/Home/Home'
-import About from './pages/public/About/About'
-import DashboardEns from './pages/plateforme/Dashboard/Enseignant/DashboardEns'
-import PlateformeLayout from './components/plateforme/PlateformeLayout'
-import DashboardEt from './pages/plateforme/Dashboard/Etudiant/DashboardEt';
-import Parametres from './pages/plateforme/Parametres/Parametres'
-import RootLayout from './layouts/RootLayout';
-import NotFound from './pages/shared/NotFound';
+import Home from "./pages/public/Home/Home"
+import About from "./pages/public/About/About"
 
+import PlateformeLayout from "./components/plateforme/PlateformeLayout"
+
+// Étudiant
+import DashboardEt from "./pages/plateforme/Dashboard/Etudiant/DashboardEt"
+
+// Enseignant
+import DashboardEns from "./pages/plateforme/Dashboard/Enseignant/DashboardEns"
+
+// Pages simples (mock ou à compléter)
+import Parametres from "./pages/plateforme/Parametres/Parametres"
+
+import NotFound from "./pages/shared/NotFound"
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
 
-        <Route path="/" element={<RootLayout/>}>
+        {/* PUBLIC */}
+        <Route path="/" element={<Home />} />
+        <Route path="/apropos" element={<About />} />
 
-          {/* PUBLIC */}
-          <Route index element={<Home/>} />
-          <Route path="apropos" element={<About/>} />
-          
-          {/* PLATEFORME */}
+        {/* PLATEFORME */}
+        <Route path="/plateforme" element={<PlateformeLayout />}>
 
-          <Route path="/plateforme" element={<PlateformeLayout/>}>
-            <Route index element={<DashboardEt/>} />
-            <Route path="enseignant" element={<DashboardEns/>} />
-            <Route path="parametres" element={<Parametres/>} />
-          </Route>
-      
-          {/* NOT FOUND */}
-          <Route path="*" element={<NotFound/>} />
-          
+          {/* ETUDIANT */}
+          <Route index element={<DashboardEt />} />
+          <Route path="cours" element={<DashboardEt />} />
+          <Route path="progression" element={<DashboardEt />} />
+          <Route path="certificats" element={<DashboardEt />} />
+          <Route path="parametres" element={<Parametres />} />
+
+          {/* ENSEIGNANT */}
+          <Route path="enseignant" element={<DashboardEns />} />
+          <Route path="enseignant/cours" element={<DashboardEns />} />
+          <Route path="enseignant/create" element={<DashboardEns />} />
+          <Route path="enseignant/stats" element={<DashboardEns />} />
+
         </Route>
+
+        {/* NOT FOUND */}
+        <Route path="*" element={<NotFound />} />
 
       </Routes>
     </BrowserRouter>
   )
 }
-
 
 export default App

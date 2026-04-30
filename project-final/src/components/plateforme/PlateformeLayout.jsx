@@ -1,13 +1,17 @@
 import { Outlet } from "react-router-dom"
+import Sidebar from "./Sidebar/Sidebar"
 import "./plateformeLayout.css"
 
 const PlateformeLayout = () => {
   return (
-    <div>
-        <h1>Plateforme Layout</h1>
-        <main>
-          <Outlet />
-        </main>
+    <div className="layout">
+
+      <Sidebar />
+
+      <main className="content">
+        <Outlet />
+      </main>
+
     </div>
   )
 }

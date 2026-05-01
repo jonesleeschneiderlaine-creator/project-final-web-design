@@ -1,51 +1,78 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
+import { useAuth } from "../../../hooks/useAuth"
 import "./sidebar.css"
 
 const Sidebar = () => {
+  const { role, logout } = useAuth()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logout()
+    navigate("/connexion")
+  }
+
   return (
     <aside className="sidebar">
 
-      <h2>Étudiant</h2>
+      {role === "etudiant" && (
+        <>
+          <h2>Étudiant</h2>
 
-      <NavLink to="/plateforme" end>
-        Dashboard
-      </NavLink>
+          <NavLink to="/plateforme/etudiant" end>
+            Dashboard
+          </NavLink>
 
-      <NavLink to="/plateforme/cours">
-        Mes cours
-      </NavLink>
+          <NavLink to="/plateforme/etudiant/cours">
+            Mes cours
+          </NavLink>
 
-      <NavLink to="/plateforme/progression">
-        Progression
-      </NavLink>
+          <NavLink to="/plateforme/etudiant/progression">
+            Progression
+          </NavLink>
 
-      <NavLink to="/plateforme/certificats">
-        Certificats
-      </NavLink>
+          <NavLink to="/plateforme/etudiant/certificats">
+            Certificats
+          </NavLink>
 
-      <NavLink to="/plateforme/parametres">
-        Paramètres
-      </NavLink>
+          <NavLink to="/plateforme/parametres">
+            Paramètres
+          </NavLink>
 
-      <hr />
+          <hr />
+        </>
+      )}
 
-      <h2>Enseignant</h2>
+      {role === "enseignant" && (
+        <>
+          <h2>Enseignant</h2>
 
-      <NavLink to="/plateforme/enseignant">
-        Dashboard
-      </NavLink>
+          <NavLink to="/plateforme/enseignant">
+            Dashboard
+          </NavLink>
 
-      <NavLink to="/plateforme/enseignant/cours">
-        Mes cours
-      </NavLink>
+          <NavLink to="/plateforme/enseignant/cours">
+            Mes cours
+          </NavLink>
 
-      <NavLink to="/plateforme/enseignant/create">
-        Créer cours
-      </NavLink>
+          <NavLink to="/plateforme/enseignant/create">
+            Créer cours
+          </NavLink>
 
-      <NavLink to="/plateforme/enseignant/stats">
-        Statistiques
-      </NavLink>
+          <NavLink to="/plateforme/enseignant/stats">
+            Statistiques
+          </NavLink>
+
+          <NavLink to="/plateforme/parametres">
+            Paramètres
+          </NavLink>
+
+          <hr />
+        </>
+      )}
+
+      <button onClick={handleLogout} className="logout-btn">
+        Déconnexion
+      </button>
 
     </aside>
   )

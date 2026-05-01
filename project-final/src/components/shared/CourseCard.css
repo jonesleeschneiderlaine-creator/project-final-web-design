@@ -1,46 +1,47 @@
 .course-card {
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 20px;
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
   display: flex;
   flex-direction: column;
   gap: 12px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: 0.2s ease;
 }
 
 .course-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
 }
 
-.course-card-default {
+/* VARIANTS */
+.course-default {
   background: #ffffff;
 }
 
-.course-card-orange {
-  background: #ffedd5;
+.course-orange {
+  background: #fff7ed;
 }
 
-.course-card-blue {
-  background: #e0f2fe;
+.course-blue {
+  background: #eff6ff;
 }
 
-.course-card-green {
+.course-green {
   background: #ecfdf5;
 }
 
+/* HEADER */
 .course-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-end;
 }
 
+/* STATUS */
 .course-status {
-  display: inline-block;
-  padding: 6px 12px;
+  padding: 5px 10px;
   border-radius: 999px;
-  font-size: 0.75rem;
+  font-size: 11px;
   font-weight: 600;
 }
 
@@ -50,7 +51,7 @@
 }
 
 .status-green {
-  background: #d1fae5;
+  background: #bbf7d0;
   color: #065f46;
 }
 
@@ -59,26 +60,22 @@
   color: #374151;
 }
 
-.status-blue {
-  background: #dbeafe;
-  color: #0c2d6b;
-}
-
+/* TEXT */
 .course-card h3 {
   margin: 0;
+  font-size: 18px;
   color: #111827;
-  font-size: 1.125rem;
-  font-weight: 600;
 }
 
 .course-instructor {
   margin: 0;
+  font-size: 13px;
   color: #6b7280;
-  font-size: 0.875rem;
 }
 
+/* PROGRESS */
 .progress-section {
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
 .progress-bar {
@@ -86,19 +83,16 @@
   background: #e5e7eb;
   border-radius: 999px;
   overflow: hidden;
-  margin-bottom: 8px;
 }
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #1e3a8a, #f97316);
-  border-radius: 999px;
+  background: linear-gradient(90deg, #1e3a8a, #3b82f6);
   transition: width 0.3s ease;
 }
 
 .progress-text {
-  margin: 0;
+  margin-top: 6px;
+  font-size: 12px;
   color: #6b7280;
-  font-size: 0.875rem;
-  font-weight: 500;
 }

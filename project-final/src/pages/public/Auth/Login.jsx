@@ -20,7 +20,7 @@ const Login = () => {
     console.log("Connexion:", { role, email, password })
     
     // Sauvegarder le rôle dans le contexte
-    login(role)
+    login({ role })
     
     // Pour l'instant, diriger vers le dashboard approprié
     if (role === "etudiant") {

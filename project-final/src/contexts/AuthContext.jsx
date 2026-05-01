@@ -1,37 +1,30 @@
-import { createContext, useState, useEffect } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 
 export const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
-  const [role, setRole] = useState(null)
-  const [loading, setLoading] = useState(true)
 
-  // Charger le rôle depuis localStorage au démarrage
   useEffect(() => {
-    const savedRole = localStorage.getItem("userRole")
-    if (savedRole) {
-      setRole(savedRole)
-      setUser({ role: savedRole })
-    }
-    setLoading(false)
+    const saved = localStorage.getItem("auth_user")
+    if (saved) setUser(JSON.parse(saved))
   }, [])
 
-  const login = (userRole) => {
-    setRole(userRole)
-    setUser({ role: userRole })
-    localStorage.setItem("userRole", userRole)
+  const login = (data) => {
+    setUser(data)
+    localStorage.setItem("auth_user", JSON.stringify(data))
   }
 
   const logout = () => {
-    setRole(null)
     setUser(null)
-    localStorage.removeItem("userRole")
+    localStorage.removeItem("auth_user")
   }
 
   return (
-    <AuthContext.Provider value={{ user, role, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, role: user?.role, login, logout }}>
       {children}
     </AuthContext.Provider>
   )
 }
+
+export const useAuth = () => useContext(AuthContext)

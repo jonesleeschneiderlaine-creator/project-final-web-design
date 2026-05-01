@@ -33,7 +33,7 @@ const Signup = () => {
     console.log("Inscription:", { role, ...formData })
     
     // Sauvegarder le rôle dans le contexte
-    login(role)
+    login({ role })
     
     // Pour l'instant, diriger vers le dashboard approprié
     if (role === "etudiant") {

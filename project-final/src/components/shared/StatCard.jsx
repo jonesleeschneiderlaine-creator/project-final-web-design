@@ -1,12 +1,11 @@
 import "./StatCard.css"
 
 const StatCard = ({ icon, label, value, color = "blue" }) => {
-  const colorClass = `stat-card-${color}`
-
   return (
-    <article className={`stat-card ${colorClass}`}>
+    <article className={`stat-card stat-${color}`}>
       {icon && <span className="stat-icon">{icon}</span>}
-      <div>
+
+      <div className="stat-content">
         <p className="stat-label">{label}</p>
         <strong className="stat-value">{value}</strong>
       </div>

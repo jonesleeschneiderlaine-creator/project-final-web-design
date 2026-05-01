@@ -1,204 +1,90 @@
-.dashboard-etudiant-home,
-.student-page {
+.dashboard-etudiant-home {
+  padding: 20px;
+}
+
+/* HEADER */
+.dashboard-header {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 14px;
+  margin-bottom: 24px;
 }
 
-.dashboard-header,
-.page-header {
+.header-top {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 8px 0;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.page-header h2 {
-  margin: 0;
-  color: #1f2937;
-  font-size: 2rem;
-}
-
-.page-header p {
-  margin: 0;
+.subtitle {
+  font-size: 14px;
   color: #6b7280;
-  font-size: 1rem;
-}
-
-.dashboard-header .subtitle {
-  color: #1e3a8a;
-  font-weight: 600;
   margin: 0;
-  font-size: 0.9375rem;
 }
 
 .dashboard-header h1 {
-  margin: 0;
-  color: #1f2937;
-  font-size: 2.25rem;
+  margin: 4px 0 0;
+  font-size: 24px;
 }
 
-.dashboard-header .description {
-  margin: 0;
-  color: #6b7280;
-  font-size: 1.0625rem;
+/* SEARCH */
+.search-bar input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  outline: none;
+  transition: 0.2s;
 }
 
+.search-bar input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* PROFILE MINI */
+.profile-mini {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* STATS */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 30px;
 }
 
-.cards-section {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.cards-section .section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.cards-section .section-header div h2 {
-  margin: 0;
-  color: #1f2937;
-  font-size: 1.5rem;
-}
-
-.cards-section .section-header div p {
-  margin: 4px 0 0 0;
-  color: #6b7280;
+/* COURSES */
+.cards-section h2 {
+  margin-bottom: 12px;
 }
 
 .course-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 20px;
-}
-
-.progress-card,
-.list-card {
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
-  padding: 24px;
-}
-
-.progress-card {
-  display: flex;
-  flex-direction: column;
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 
-.progress-card h3 {
-  margin: 0;
-  color: #111827;
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .course-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-.progress-bar {
-  height: 12px;
-  background: #e5e7eb;
-  border-radius: 999px;
-  overflow: hidden;
-}
+@media (max-width: 640px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
 
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #1e3a8a 0%, #f97316 100%);
-  transition: width 0.3s ease;
-}
-
-.progress-text {
-  margin: 0;
-  color: #6b7280;
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.section {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.section h3 {
-  margin: 0;
-  color: #1f2937;
-}
-
-.list-card {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.list-card li {
-  padding: 14px 16px;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  color: #374151;
-  background: #fafbfc;
-  font-size: 0.9375rem;
-  transition: all 0.2s;
-}
-
-.list-card li:hover {
-  border-color: #1e3a8a;
-  background: #f0f4fd;
-}
-
-.certificates-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.certificate-card {
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: center;
-  text-align: center;
-}
-
-.cert-icon {
-  font-size: 3rem;
-}
-
-.certificate-card h3 {
-  margin: 0;
-  color: #111827;
-  font-size: 1.125rem;
-}
-
-.cert-date {
-  margin: 0;
-  color: #6b7280;
-  font-size: 0.875rem;
-}
-
-.secondary-button {
-  background: transparent;
-  border: 2px solid #1e3a8a;
-  color: #1e3a8a;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.2s;
-}
-
-.secondary-button:hover {
-  background: #1e3a8a;
-  color: white;
+  .course-grid {
+    grid-template-columns: 1fr;
+  }
 }

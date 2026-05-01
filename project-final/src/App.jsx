@@ -10,17 +10,17 @@ import Signup from "./pages/public/Auth/Signup"
 
 import PlateformeLayout from "./components/plateforme/PlateformeLayout"
 
-import DashboardEtHome from "./pages/plateforme/Dashboard/Etudiant/DashboardEtHome"
-import Cours from "./pages/plateforme/Dashboard/Etudiant/Cours"
-import Progression from "./pages/plateforme/Dashboard/Etudiant/Progression"
-import Certificats from "./pages/plateforme/Dashboard/Etudiant/Certificats"
+import DashboardEtHome from "./pages/plateforme/etudiant/DashboardEtHome"
+import Cours from "./pages/plateforme/etudiant/Cours"
+import Progression from "./pages/plateforme/etudiant/Progression"
+import Certificats from "./pages/plateforme/etudiant/Certificats"
 
-import DashboardEnsHome from "./pages/plateforme/Dashboard/Enseignant/DashboardEnsHome"
-import DashboardEnsCours from "./pages/plateforme/Dashboard/Enseignant/DashboardEnsCours"
-import DashboardEnsCreate from "./pages/plateforme/Dashboard/Enseignant/DashboardEnsCreate"
-import DashboardEnsStats from "./pages/plateforme/Dashboard/Enseignant/DashboardEnsStats"
+import DashboardEnsHome from "./pages/plateforme/enseignant/DashboardEnsHome"
+import DashboardEnsCours from "./pages/plateforme/enseignant/DashboardEnsCours"
+import DashboardEnsCreate from "./pages/plateforme/enseignant/DashboardEnsCreate"
+import DashboardEnsStats from "./pages/plateforme/enseignant/DashboardEnsStats"
 
-import Parametres from "./pages/plateforme/Parametres/Parametres"
+import Parametres from "./pages/plateforme/parametres/Parametres"
 import NotFound from "./pages/shared/NotFound"
 
 const App = () => {
@@ -120,7 +120,10 @@ const App = () => {
             />
 
             {/* PARAMETRES */}
-            <Route path="parametres" element={<Parametres />} />
+            <Route
+              path="parametres"
+              element={<Parametres />}
+            />
 
           </Route>
 

@@ -1,4 +1,4 @@
-import { studentCertificates } from "../../../../lib/mockData"
+import { studentCertificates } from "@/lib/mockData";
 import "./dashboardEt.css"
 
 const Certificats = () => {

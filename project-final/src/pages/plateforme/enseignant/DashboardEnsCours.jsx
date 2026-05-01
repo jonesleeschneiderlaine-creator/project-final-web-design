@@ -1,4 +1,4 @@
-import { teacherCourses } from "../../../../lib/mockData"
+import { teacherCourses } from "@/lib/mockData";
 import "./dashboardEns.css"
 
 const DashboardEnsCours = () => {

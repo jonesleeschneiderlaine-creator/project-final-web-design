@@ -1,6 +1,6 @@
-import StatCard from "../../../../components/shared/StatCard"
-import CourseCard from "../../../../components/shared/CourseCard"
-import { teacherStats, teacherCourses } from "../../../../lib/mockData"
+import StatCard from "@/components/shared/StatCard";
+import CourseCard from "@/components/shared/CourseCard";
+import { teacherStats, teacherCourses } from "@/lib/mockData";
 import "./dashboardEns.css"
 
 const DashboardEnsHome = () => {

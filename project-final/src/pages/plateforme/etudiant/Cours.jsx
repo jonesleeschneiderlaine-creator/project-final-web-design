@@ -1,5 +1,5 @@
-import CourseCard from "../../../../components/shared/CourseCard"
-import { studentCourses } from "../../../../lib/mockData"
+import CourseCard from "@/components/shared/CourseCard";
+import { studentCourses } from "@/lib/mockData";
 import "./dashboardEt.css"
 
 const Cours = () => {

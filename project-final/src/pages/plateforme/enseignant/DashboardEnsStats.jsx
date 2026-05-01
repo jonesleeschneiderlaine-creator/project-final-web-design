@@ -1,5 +1,5 @@
-import StatCard from "../../../../components/shared/StatCard"
-import { teacherStats2 } from "../../../../lib/mockData"
+import StatCard from "@/components/shared/StatCard";
+import { teacherStats2 } from "@/lib/mockData";
 import "./dashboardEns.css"
 
 const DashboardEnsStats = () => {

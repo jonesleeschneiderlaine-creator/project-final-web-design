@@ -88,3 +88,157 @@
     grid-template-columns: 1fr;
   }
 }
+
+.student-page {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 2rem;
+  color: #111827;
+}
+
+.page-header p {
+  margin: 0;
+  color: #475569;
+  font-size: 1rem;
+  max-width: 720px;
+}
+
+.certificates-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.progress-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 20px;
+}
+
+.progress-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.progress-card h3 {
+  margin: 0 0 16px 0;
+  font-size: 1.15rem;
+  color: #0f172a;
+}
+
+.progress-card p {
+  margin: 0;
+  color: #475569;
+  line-height: 1.6;
+}
+
+.progress-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.progress-score {
+  background: #eef2ff;
+  color: #1e40af;
+  font-weight: 700;
+  border-radius: 14px;
+  padding: 10px 16px;
+  min-width: 72px;
+  text-align: center;
+}
+
+.progress-bar {
+  height: 16px;
+  background: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2563eb 0%, #2563eb 100%);
+  transition: width 0.4s ease;
+}
+
+.progress-text {
+  margin-top: 12px;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.progress-list {
+  display: grid;
+  gap: 16px;
+}
+
+.section {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.section h3 {
+  margin: 0 0 18px 0;
+  font-size: 1.15rem;
+  color: #0f172a;
+}
+
+.task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.task-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  padding: 16px 18px;
+  color: #334155;
+  font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+  .progress-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .student-page {
+    padding: 18px;
+  }
+
+  .page-header h2 {
+    font-size: 1.75rem;
+  }
+
+  .progress-card,
+  .section {
+    padding: 22px;
+  }
+}

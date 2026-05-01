@@ -47,6 +47,7 @@ const Sidebar = () => {
           <NavLink to="/plateforme/enseignant/cours" className={linkClass}>Cours</NavLink>
           <NavLink to="/plateforme/enseignant/create" className={linkClass}>Créer</NavLink>
           <NavLink to="/plateforme/enseignant/stats" className={linkClass}>Stats</NavLink>
+          <NavLink to="/plateforme/parametres" className={linkClass}>Paramètres</NavLink>
         </nav>
       )}
 

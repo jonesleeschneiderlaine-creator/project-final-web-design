@@ -1,5 +1,6 @@
 import { studentCertificates } from "@/lib/mockData"
 import "@/pages/plateforme/etudiant/dashboardEt.css"
+import CertificateCard from "@/components/shared/CertificateCard"
 
 const Certificats = () => {
   return (
@@ -11,27 +12,15 @@ const Certificats = () => {
       </header>
 
       <div className="certificates-grid">
-
         {studentCertificates.map((cert) => (
-          <article key={cert.id} className="certificate-card">
-
-            <div className="cert-icon">
-              {cert.icon}
-            </div>
-
-            <h3>{cert.title}</h3>
-
-            <p className="cert-date">
-              Obtenu le {cert.date}
-            </p>
-
-            <button className="secondary-button">
-              Télécharger le PDF
-            </button>
-
-          </article>
+          <CertificateCard
+            key={cert.id}
+            title={cert.title}
+            date={cert.date}
+            icon={cert.icon}
+            onDownload={() => console.log("Téléchargement de", cert.title)}
+          />
         ))}
-
       </div>
 
     </div>

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./home.css"
 
 const Home = () => {
@@ -11,9 +11,8 @@ const Home = () => {
           <h2>EduHaïti</h2>
         </div>
         <div className="navbar-links">
-          <a href="#accueil">Accueil</a>
-          <a href="#apropos">À Propos</a>
-          <a href="#contact">Contact</a>
+          <Link to="/apropos">À Propos</Link>
+          <Link to="/contact">Contact</Link>
         </div>
       </nav>
 

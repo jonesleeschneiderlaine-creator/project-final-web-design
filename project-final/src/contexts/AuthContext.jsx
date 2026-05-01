@@ -1,14 +1,11 @@
-import { createContext, useContext, useEffect, useState } from "react"
-
-export const AuthContext = createContext()
+import { useState } from "react"
+import { AuthContext } from "./authContext"
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
+  const [user, setUser] = useState(() => {
     const saved = localStorage.getItem("auth_user")
-    if (saved) setUser(JSON.parse(saved))
-  }, [])
+    return saved ? JSON.parse(saved) : null
+  })
 
   const login = (data) => {
     setUser(data)
@@ -26,5 +23,3 @@ export const AuthProvider = ({ children }) => {
     </AuthContext.Provider>
   )
 }
-
-export const useAuth = () => useContext(AuthContext)

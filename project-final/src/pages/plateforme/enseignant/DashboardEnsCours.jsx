@@ -1,7 +1,10 @@
 import { teacherCourses } from "@/lib/mockData";
+import { useNavigate } from "react-router-dom";
 import "./dashboardEns.css"
 
 const DashboardEnsCours = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="dashboard-enseignant-page">
       <header className="page-header">
@@ -9,7 +12,9 @@ const DashboardEnsCours = () => {
         <p>Gérez et modifiez vos cours.</p>
       </header>
 
-      <button className="primary-button">+ Créer un nouveau cours</button>
+      <button className="primary-button" onClick={() => navigate("/plateforme/enseignant/create")}>
+        + Créer un nouveau cours
+      </button>
 
       <div className="table-container">
         <div className="table-card">

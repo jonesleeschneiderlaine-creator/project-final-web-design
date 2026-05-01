@@ -4,10 +4,10 @@ import "./plateformeLayout.css"
 
 const PlateformeLayout = () => {
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
+    <div className="layout">
       <Sidebar />
 
-      <main style={{ flex: 1, padding: "20px" }}>
+      <main className="content">
         <Outlet />
       </main>
     </div>

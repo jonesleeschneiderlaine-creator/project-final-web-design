@@ -35,7 +35,9 @@ const Home = () => {
 
 
 
-      {/* ========== BOUTONS DASHBOARDS ========== */}
+      { /* ========== BOUTONS DASHBOARDS ==========   */}
+
+
       <div className="dashboard-buttons">
         <Link to="/dashboard-enseignant">
           <button className="btn dashboard-btn enseignant-btn">
@@ -47,7 +49,9 @@ const Home = () => {
             👨‍🎓 Dashboard Étudiant
           </button>
         </Link>
-      </div>
+      </div>       
+
+    
 
       {/* ========== HERO SECTION ========== */}
       <section className="hero">

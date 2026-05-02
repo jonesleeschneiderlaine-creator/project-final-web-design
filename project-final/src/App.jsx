@@ -8,6 +8,7 @@ import Connexion from './Component/Connexion';
 import CreateAccount from './Component/CreateAccount';
 import DashboardEtudiant from './Pages/DashboardEtudiant';
 import DashboardEnseignant from './Pages/DashboardEnseignant';
+import VideoCours from './Pages/VideoCours';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/createaccount" element={<CreateAccount />} />
         <Route path="/dashboard-etudiant" element={<DashboardEtudiant />} />
         <Route path="/dashboard-enseignant" element={<DashboardEnseignant />} />
+        <Route path="/video-cours/:courseId/:lessonId" element={<VideoCours />} />
       </Routes>
     </BrowserRouter>
   );

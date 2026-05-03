@@ -35,7 +35,7 @@ const Home = () => {
 
 
 
-      { /* ========== BOUTONS DASHBOARDS ==========   */}
+      { /* ========== BOUTONS DASHBOARDS ==========  
 
 
       <div className="dashboard-buttons">
@@ -51,7 +51,9 @@ const Home = () => {
         </Link>
       </div>       
 
-    
+     */}
+
+     
 
       {/* ========== HERO SECTION ========== */}
       <section className="hero">

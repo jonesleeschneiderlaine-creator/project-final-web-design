@@ -80,7 +80,9 @@ const DashboardEtudiant = () => {
         <nav className="main-nav">
           <a href="#" onClick={() => setActiveTab('dashboard')} className={activeTab === 'dashboard' ? 'active' : ''}>🏠 Dashboard</a>
           <a href="#" onClick={() => setActiveTab('courses')} className={activeTab === 'courses' ? 'active' : ''}>📚 Mes cours</a>
-          <a href="#" onClick={() => setActiveTab('profile')} className={activeTab === 'profile' ? 'active' : ''}>👤 Profil</a>
+
+          {/* <a href="#" onClick={() => setActiveTab('profile')} className={activeTab === 'profile' ? 'active' : ''}>👤 Profil</a> */}
+          
           <a href="#" onClick={() => setActiveTab('grades')} className={activeTab === 'grades' ? 'active' : ''}>🎓 Grades</a>
           <a href="#" onClick={() => setActiveTab('settings')} className={activeTab === 'settings' ? 'active' : ''}>⚙️ Paramètres</a>
         </nav>

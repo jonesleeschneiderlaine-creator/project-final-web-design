@@ -34,7 +34,7 @@ const Cours = () => {
         <Link to="/" className="logo">🇭🇹 EduHaïti</Link>
         <nav>
           <Link to="/">Accueil</Link>
-          <Link to="/cours" className="active">Cours</Link>
+          <Link to="/plateforme/cours" className="active">Cours</Link>
           <Link to="/apropos">À propos</Link>
           <Link to="/contact">Contact</Link>
         </nav>
@@ -91,7 +91,7 @@ const Cours = () => {
           <p>La plateforme d'apprentissage pour un Haïti meilleur</p>
         </div>
         <div className="footer-links">
-          <Link to="/cours">Cours</Link>
+          <Link to="/plateforme/cours">Cours</Link>
           <Link to="/apropos">À propos</Link>
           <Link to="/contact">Contact</Link>
           <a href="#">Politique de confidentialité</a>

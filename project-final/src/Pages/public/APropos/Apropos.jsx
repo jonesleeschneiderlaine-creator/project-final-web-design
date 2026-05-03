@@ -2,26 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './apropos.css';
 
-const Apropos = () => {
+const APropos = () => {
   return (
     <div className="apropos-container">
-      <header className="navbar">
-        <Link to="/" className="logo">🇭🇹 EduHaïti</Link>
-        <nav>
-          <Link to="/">Accueil</Link>
-          <Link to="/cours">Cours</Link>
-          <Link to="/apropos" className="active">À propos</Link>
-          <Link to="/contact">Contact</Link>
-        </nav>
-        <div className="auth">
-          <Link to="/connexion">
-            <button className="btn login">Connexion</button>
-          </Link>
-          <Link to="/createaccount">
-            <button className="btn register">S'inscrire</button>
-          </Link>
-        </div>
-      </header>
+      
 
       <section className="banner">
         <h1>🇭🇹 À propos d'EduHaïti</h1>
@@ -91,20 +75,9 @@ const Apropos = () => {
         </div>
       </section>
 
-      <footer className="footer">
-        <div className="footer-left">
-          <h3>🇭🇹 EduHaïti</h3>
-          <p>La plateforme d'apprentissage pour un Haïti meilleur</p>
-        </div>
-        <div className="footer-links">
-          <Link to="/cours">Cours</Link>
-          <Link to="/apropos">À propos</Link>
-          <Link to="/contact">Contact</Link>
-          <a href="#">Politique de confidentialité</a>
-        </div>
-      </footer>
+      
     </div>
   );
 };
 
-export default Apropos;
+export default APropos;

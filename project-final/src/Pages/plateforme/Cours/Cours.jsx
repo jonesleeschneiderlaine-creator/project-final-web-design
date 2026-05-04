@@ -30,23 +30,7 @@ const Cours = () => {
 
   return (
     <div className="cours-container">
-      <header className="navbar">
-        <Link to="/" className="logo">🇭🇹 EduHaïti</Link>
-        <nav>
-          <Link to="/">Accueil</Link>
-          <Link to="/plateforme/cours" className="active">Cours</Link>
-          <Link to="/apropos">À propos</Link>
-          <Link to="/contact">Contact</Link>
-        </nav>
-        <div className="auth">
-          <Link to="/connexion">
-            <button className="btn login">Connexion</button>
-          </Link>
-          <Link to="/createaccount">
-            <button className="btn register">S'inscrire</button>
-          </Link>
-        </div>
-      </header>
+      
 
       <section className="banner">
         <h1>📚 Nos cours</h1>
@@ -85,18 +69,7 @@ const Cours = () => {
         </div>
       </section>
 
-      <footer className="footer">
-        <div className="footer-left">
-          <h3>🇭🇹 EduHaïti</h3>
-          <p>La plateforme d'apprentissage pour un Haïti meilleur</p>
-        </div>
-        <div className="footer-links">
-          <Link to="/plateforme/cours">Cours</Link>
-          <Link to="/apropos">À propos</Link>
-          <Link to="/contact">Contact</Link>
-          <a href="#">Politique de confidentialité</a>
-        </div>
-      </footer>
+      
     </div>
   );
 };

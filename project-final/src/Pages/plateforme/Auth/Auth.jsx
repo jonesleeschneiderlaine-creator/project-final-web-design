@@ -129,6 +129,7 @@ const Auth = ({ defaultMode = 'signin' }) => {
                 </div>
               )}
               
+              
               <button 
                 onClick={() => {
                   setShowVerification(false);

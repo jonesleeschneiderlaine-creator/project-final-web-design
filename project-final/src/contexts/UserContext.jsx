@@ -1,6 +1,6 @@
 // src/contexts/UserContext.jsx
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import { authService } from '../services/authService';
+import React, { createContext, useContext } from 'react';
+import { useAuth } from './AuthContext';
 
 const UserContext = createContext(null);
 
@@ -13,83 +13,19 @@ export const useUser = () => {
 };
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    // Check for existing session on mount
-    const initAuth = async () => {
-      try {
-        const currentUser = await authService.getCurrentUser();
-        setUser(currentUser);
-      } catch (err) {
-        console.error('Auth initialization error:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    initAuth();
-
-    // Listen for auth changes
-    const unsubscribe = authService.onAuthStateChange((user) => {
-      setUser(user);
-      setLoading(false);
-    });
-
-    return () => {
-      if (unsubscribe) unsubscribe();
-    };
-  }, []);
-
-  const login = async (email, password) => {
-    setError(null);
-    try {
-      const user = await authService.signIn(email, password);
-      setUser(user);
-      return user;
-    } catch (err) {
-      setError(err.message);
-      throw err;
-    }
-  };
-
-  const signup = async (email, password, userData) => {
-    setError(null);
-    try {
-      const user = await authService.signUp(email, password, userData);
-      setUser(user);
-      return user;
-    } catch (err) {
-      setError(err.message);
-      throw err;
-    }
-  };
-
-  const logout = async () => {
-    try {
-      await authService.signOut();
-      setUser(null);
-    } catch (err) {
-      setError(err.message);
-      throw err;
-    }
-  };
-
+  const auth = useAuth();
+  
+  // Map AuthContext to your existing UserContext interface
   const value = {
-    user,
-    loading,
-    error,
-    login,
-    signup,
-    logout,
-    isAuthenticated: !!user
+    user: auth.user,
+    loading: auth.loading,
+    error: auth.error,
+    login: auth.signIn,
+    signup: auth.signUp,
+    logout: auth.signOut,
+    resetPassword: auth.resetPassword,
+    isAuthenticated: auth.isAuthenticated,
   };
 
-  return (
-    <UserContext.Provider value={value}>
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

@@ -1,12 +1,11 @@
 // src/utils/ProtectedRoute.jsx
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../contexts/AuthContext';
 
 export const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
 
   if (loading) {
-    // Show loading spinner while checking auth
     return (
       <div className="auth-loading">
         <div className="spinner"></div>
@@ -16,7 +15,6 @@ export const ProtectedRoute = ({ children }) => {
   }
 
   if (!isAuthenticated) {
-    // Redirect to auth page if not logged in
     return <Navigate to="/connexion" replace />;
   }
 

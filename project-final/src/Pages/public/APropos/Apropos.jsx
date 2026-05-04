@@ -74,7 +74,6 @@ const APropos = () => {
           </div>
         </div>
       </section>
-
       
     </div>
   );

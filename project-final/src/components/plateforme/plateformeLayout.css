@@ -1,0 +1,43 @@
+/* src/components/plateforme/plateformeLayout.css */
+.plateforme-layout {
+  min-height: 100vh;
+  background: #f5f7fb;
+}
+
+.plateforme-layout__main {
+  margin-top: 70px;
+  min-height: calc(100vh - 70px);
+  transition: margin-left 0.3s ease;
+}
+
+.plateforme-layout__content {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+@media (min-width: 769px) {
+  .plateforme-layout__main {
+    margin-left: 280px;
+  }
+}
+
+@media (max-width: 768px) {
+  .plateforme-layout__main {
+    margin-left: 0;
+  }
+
+  .plateforme-layout__content {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .plateforme-layout__main {
+    margin-top: 60px;
+  }
+
+  .plateforme-layout__content {
+    padding: 12px;
+  }
+}

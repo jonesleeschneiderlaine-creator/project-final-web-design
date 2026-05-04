@@ -1,58 +1,58 @@
-/* src/components/plateforme/CreateAccount/createAccount.css */
-.create-account {
+/* src/components/plateforme/SignIn/signIn.css */
+.signin {
   width: 100%;
-  max-width: 520px;
+  max-width: 480px;
   background: white;
   border-radius: 24px;
   padding: 40px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-.create-account__header {
+.signin__header {
   text-align: center;
   margin-bottom: 32px;
 }
 
-.create-account__icon {
+.signin__icon {
   font-size: 48px;
   margin-bottom: 16px;
 }
 
-.create-account__title {
+.signin__title {
   font-size: 28px;
   color: #0b1f3a;
   margin-bottom: 8px;
   font-weight: bold;
 }
 
-.create-account__subtitle {
+.signin__subtitle {
   color: #666;
   font-size: 14px;
 }
 
-.create-account__form {
+.signin__form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
 }
 
-.create-account__form-group {
+.signin__form-group {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.create-account__label {
+.signin__label {
   font-weight: 600;
   color: #0b1f3a;
   font-size: 14px;
 }
 
-.create-account__input-wrapper {
+.signin__input-wrapper {
   position: relative;
 }
 
-.create-account__input-icon {
+.signin__input-icon {
   position: absolute;
   left: 12px;
   top: 50%;
@@ -60,8 +60,7 @@
   color: #999;
 }
 
-.create-account__input,
-.create-account__select {
+.signin__input {
   width: 100%;
   padding: 12px 16px 12px 40px;
   border: 2px solid #e0e4e8;
@@ -71,33 +70,26 @@
   font-family: inherit;
 }
 
-.create-account__select {
-  padding: 12px 16px;
-  cursor: pointer;
-}
-
-.create-account__input:focus,
-.create-account__select:focus {
+.signin__input:focus {
   outline: none;
   border-color: #1e6bd6;
   box-shadow: 0 0 0 3px rgba(30, 107, 214, 0.1);
 }
 
-.create-account__input--error {
+.signin__input--error {
   border-color: #e74c3c;
 }
 
-.create-account__input:disabled,
-.create-account__select:disabled {
+.signin__input:disabled {
   background: #f5f7fb;
   cursor: not-allowed;
 }
 
-.create-account__password-wrapper {
+.signin__password-wrapper {
   position: relative;
 }
 
-.create-account__password-icon {
+.signin__password-icon {
   position: absolute;
   left: 12px;
   top: 50%;
@@ -105,7 +97,7 @@
   color: #999;
 }
 
-.create-account__toggle-password {
+.signin__toggle-password {
   position: absolute;
   right: 12px;
   top: 50%;
@@ -118,17 +110,17 @@
   transition: color 0.2s;
 }
 
-.create-account__toggle-password:hover {
+.signin__toggle-password:hover {
   color: #0b1f3a;
 }
 
-.create-account__error {
+.signin__error {
   color: #e74c3c;
   font-size: 12px;
   margin-top: 4px;
 }
 
-.create-account__error-global {
+.signin__error-global {
   background: #fee;
   color: #c0392b;
   padding: 12px;
@@ -138,33 +130,37 @@
   border-left: 3px solid #e74c3c;
 }
 
-.create-account__terms {
-  margin: 8px 0;
+.signin__options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
 }
 
-.create-account__checkbox {
+.signin__checkbox {
   display: flex;
   align-items: center;
   gap: 8px;
   color: #666;
-  font-size: 13px;
   cursor: pointer;
 }
 
-.create-account__checkbox input {
+.signin__checkbox input {
   cursor: pointer;
 }
 
-.create-account__checkbox a {
+.signin__forgot {
   color: #1e6bd6;
   text-decoration: none;
+  transition: color 0.2s;
 }
 
-.create-account__checkbox a:hover {
+.signin__forgot:hover {
+  color: #0f4c81;
   text-decoration: underline;
 }
 
-.create-account__submit {
+.signin__submit {
   background: #f39c12;
   color: white;
   padding: 14px;
@@ -178,21 +174,20 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-top: 8px;
 }
 
-.create-account__submit:hover:not(:disabled) {
+.signin__submit:hover:not(:disabled) {
   background: #e67e22;
   transform: scale(1.02);
   box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
 }
 
-.create-account__submit:disabled {
+.signin__submit:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-.create-account__spinner {
+.signin__spinner {
   width: 18px;
   height: 18px;
   border: 2px solid white;
@@ -201,13 +196,13 @@
   animation: spin 0.6s linear infinite;
 }
 
-.create-account__divider {
+.signin__divider {
   text-align: center;
   position: relative;
   margin: 8px 0;
 }
 
-.create-account__divider span {
+.signin__divider span {
   background: white;
   padding: 0 16px;
   color: #999;
@@ -216,7 +211,7 @@
   z-index: 1;
 }
 
-.create-account__divider::before {
+.signin__divider::before {
   content: '';
   position: absolute;
   top: 50%;
@@ -227,12 +222,12 @@
   z-index: 0;
 }
 
-.create-account__social {
+.signin__social {
   display: flex;
   gap: 12px;
 }
 
-.create-account__social-btn {
+.signin__social-btn {
   flex: 1;
   padding: 12px;
   border: 2px solid #e0e4e8;
@@ -247,29 +242,29 @@
   gap: 8px;
 }
 
-.create-account__social-btn--google:hover {
+.signin__social-btn--google:hover {
   background: #fee;
   border-color: #db4437;
 }
 
-.create-account__social-btn--facebook:hover {
+.signin__social-btn--facebook:hover {
   background: #eef;
   border-color: #4267b2;
 }
 
-.create-account__footer {
+.signin__footer {
   margin-top: 24px;
   text-align: center;
   padding-top: 20px;
   border-top: 1px solid #e0e4e8;
 }
 
-.create-account__footer p {
+.signin__footer p {
   color: #666;
   font-size: 14px;
 }
 
-.create-account__switch {
+.signin__switch {
   background: none;
   border: none;
   color: #1e6bd6;
@@ -279,7 +274,7 @@
   transition: color 0.2s;
 }
 
-.create-account__switch:hover {
+.signin__switch:hover {
   color: #0f4c81;
 }
 

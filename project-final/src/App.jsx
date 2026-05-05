@@ -12,13 +12,13 @@ import DashboardEt from './pages/plateforme/Dashboard/Etudiant/DashboardEt';
 import Parametres from './pages/plateforme/Parametres/Parametres';
 import RootLayout from './layouts/RootLayout';
 import NotFound from './pages/shared/NotFound';
-import APropos from './pages/public/APropos/APropos';
 import PolitiqueConfidentialite from './pages/public/PolitiqueConfidentialite/PolitiqueConfidentialite';
 import Contact from './pages/public/Contact/Contact';
 import Cours from './pages/plateforme/Cours/Cours';
 import Auth from './pages/plateforme/Auth/Auth';
 import ResetPassword from './pages/plateforme/Auth/ResetPassword';
 import ForgotPassword from './pages/plateforme/Auth/ForgotPassword';
+import APropos from './pages/public/APropos/APropos';
 
 
 const App = () => {

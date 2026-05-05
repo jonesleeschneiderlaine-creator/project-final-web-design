@@ -1,24 +1,35 @@
 /* src/components/plateforme/Sidebar/sidebar.css */
+
+/* ── Base ─────────────────────────────────────────────────────────────────── */
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
-  width: 280px;
-  background: linear-gradient(180deg, #0b1f3a 0%, #0f4c81 100%);
+  width: 260px;
   color: white;
   display: flex;
   flex-direction: column;
   transform: translateX(-100%);
   transition: transform 0.3s ease-in-out;
   z-index: 1000;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 0 16px rgba(0, 0, 0, 0.2);
 }
 
 .sidebar--open {
   transform: translateX(0);
 }
 
+/* ── Couleurs par rôle ────────────────────────────────────────────────────── */
+.sidebar--enseignant {
+  background: #1b2744;
+}
+
+.sidebar--etudiant {
+  background: #2c3488;
+}
+
+/* ── Overlay (mobile) ────────────────────────────────────────────────────── */
 .sidebar__overlay {
   position: fixed;
   top: 0;
@@ -30,8 +41,9 @@
   animation: fadeIn 0.3s ease;
 }
 
+/* ── En-tête / Logo ──────────────────────────────────────────────────────── */
 .sidebar__header {
-  padding: 24px 20px;
+  padding: 22px 20px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -41,81 +53,114 @@
 .sidebar__logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
-.sidebar__logo-icon {
-  font-size: 28px;
+.sidebar__logo-emoji {
+  font-size: 22px;
+  line-height: 1;
 }
 
 .sidebar__logo-text {
-  font-size: 20px;
-  font-weight: bold;
-  letter-spacing: 1px;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: white;
 }
 
 .sidebar__close {
   background: none;
   border: none;
-  color: white;
-  font-size: 24px;
+  color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 8px;
-  transition: background 0.2s;
+  padding: 4px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
   display: none;
 }
 
 .sidebar__close:hover {
   background: rgba(255, 255, 255, 0.1);
+  color: white;
 }
 
+/* ── Étiquette de rôle ───────────────────────────────────────────────────── */
+.sidebar__role-label {
+  padding: 14px 20px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+}
+
+/* ── Navigation ──────────────────────────────────────────────────────────── */
 .sidebar__nav {
   flex: 1;
-  padding: 20px 16px;
+  padding: 6px 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  overflow-y: auto;
 }
 
 .sidebar__nav-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  border-radius: 12px;
-  color: rgba(255, 255, 255, 0.8);
+  gap: 13px;
+  padding: 13px 20px;
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
-  transition: all 0.2s;
+  transition: background 0.15s ease, color 0.15s ease;
+  font-size: 14.5px;
   font-weight: 500;
+  /* Pas de border-radius : l'actif couvre toute la largeur */
+  border-radius: 0;
 }
 
-.sidebar__nav-item:hover {
-  background: rgba(255, 255, 255, 0.1);
+.sidebar__nav-item:hover:not(.sidebar__nav-item--active) {
+  background: rgba(255, 255, 255, 0.07);
   color: white;
 }
 
+/* ── État actif (bande pleine largeur) ───────────────────────────────────── */
 .sidebar__nav-item--active {
-  background: rgba(243, 156, 18, 0.2);
-  color: #f39c12;
+  background: rgba(255, 255, 255, 0.13);
+  color: white;
+  font-weight: 600;
 }
 
-.sidebar__nav-item--active .sidebar__nav-icon {
-  color: #f39c12;
+/* ── Item spécial "Créer un cours" ───────────────────────────────────────── */
+.sidebar__nav-item--creer {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 14px;
 }
 
-.sidebar__nav-icon {
-  font-size: 22px;
-  width: 28px;
+.sidebar__nav-item--creer:hover:not(.sidebar__nav-item--active) {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sidebar__nav-item--creer .sidebar__nav-emoji {
+  font-size: 15px;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+/* ── Emoji des items ─────────────────────────────────────────────────────── */
+.sidebar__nav-emoji {
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 22px;
   text-align: center;
 }
 
 .sidebar__nav-label {
-  font-size: 15px;
+  flex: 1;
 }
 
+/* ── Pied de page ────────────────────────────────────────────────────────── */
 .sidebar__footer {
-  padding: 20px;
+  padding: 16px 20px 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -123,72 +168,80 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 16px;
-  padding: 12px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 14px;
+}
+
+/* Avatar enseignant : orange */
+.sidebar__user-avatar--enseignant {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+}
+
+/* Avatar étudiant : bleu-ardoise */
+.sidebar__user-avatar--etudiant {
+  background: rgba(255, 255, 255, 0.18);
 }
 
 .sidebar__user-avatar {
-  width: 48px;
-  height: 48px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #f39c12, #e67e22);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 700;
   text-transform: uppercase;
+  color: white;
+  flex-shrink: 0;
+  letter-spacing: 0.5px;
 }
 
 .sidebar__user-info {
   flex: 1;
+  min-width: 0;
 }
 
 .sidebar__user-name {
   font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 4px;
+  font-size: 13.5px;
   color: white;
+  margin: 0 0 2px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sidebar__user-role {
   font-size: 12px;
-  opacity: 0.7;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
 }
 
+/* ── Bouton déconnexion (discret) ────────────────────────────────────────── */
 .sidebar__logout {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  background: rgba(231, 76, 60, 0.2);
-  border: none;
-  border-radius: 12px;
-  color: #e74c3c;
-  font-weight: 600;
+  justify-content: center;
+  padding: 9px 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s;
-  font-size: 15px;
+  transition: all 0.2s ease;
+  letter-spacing: 0.2px;
 }
 
 .sidebar__logout:hover {
-  background: rgba(231, 76, 60, 0.3);
-  transform: translateX(4px);
+  background: rgba(231, 76, 60, 0.2);
+  border-color: rgba(231, 76, 60, 0.3);
+  color: #e88;
 }
 
-.sidebar__logout-icon {
-  font-size: 20px;
-}
-
-.sidebar__logout-text {
-  flex: 1;
-  text-align: left;
-}
-
-/* Desktop styles */
+/* ── Desktop ─────────────────────────────────────────────────────────────── */
 @media (min-width: 769px) {
   .sidebar {
     transform: translateX(0);
@@ -203,10 +256,10 @@
   }
 }
 
-/* Mobile styles */
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
   .sidebar {
-    width: 280px;
+    width: 260px;
   }
 
   .sidebar__close {
@@ -214,11 +267,8 @@
   }
 }
 
+/* ── Animation overlay ───────────────────────────────────────────────────── */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }

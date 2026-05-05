@@ -1,0 +1,77 @@
+/* src/pages/plateforme/DashboardEns/dashboardEns.css */
+
+/* ── Conteneur principal ─────────────────────────────────────────────────── */
+.dashboard-ens {
+  min-height: calc(100vh - 70px);
+  background: #f4f6fb;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  box-sizing: border-box;
+}
+
+/* ── Cartes statistiques ─────────────────────────────────────────────────── */
+.dashboard-ens__cartes {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.dashboard-ens__cartes > * {
+  flex: 1;
+  min-width: 180px;
+}
+
+/* ── Sections internes ───────────────────────────────────────────────────── */
+.dashboard-ens__section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.dashboard-ens__section-titre {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a2b4a;
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+
+/* ── Bas de page ─────────────────────────────────────────────────────────── */
+.dashboard-ens__bas {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.dashboard-ens__bas > * {
+  flex: 1;
+  min-width: 280px;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .dashboard-ens {
+    padding: 20px 16px;
+    gap: 20px;
+  }
+
+  .dashboard-ens__cartes {
+    gap: 12px;
+  }
+
+  .dashboard-ens__cartes > * {
+    min-width: calc(50% - 6px);
+  }
+
+  .dashboard-ens__bas {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-ens__cartes > * {
+    min-width: 100%;
+  }
+}

@@ -18,6 +18,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
+  flex: 1;
 }
 
 .topbar__menu-btn {
@@ -36,16 +37,45 @@
   background: #f5f7fb;
 }
 
-.topbar__breadcrumb-text {
-  font-size: 18px;
-  font-weight: 600;
-  color: #0b1f3a;
+.topbar__breadcrumb {
+  display: flex;
+  align-items: center;
+}
+
+.topbar__salutation {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a2b4a;
+  margin: 0;
+  letter-spacing: -0.3px;
 }
 
 .topbar__right {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
+}
+
+.topbar__btn-nouveau {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #1a5cb8 0%, #2471e0 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 3px 10px rgba(26, 92, 184, 0.35);
+  letter-spacing: 0.2px;
+}
+
+.topbar__btn-nouveau:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 16px rgba(26, 92, 184, 0.45);
 }
 
 .topbar__notifications {
@@ -57,10 +87,12 @@
   padding: 8px;
   border-radius: 10px;
   transition: background 0.2s;
+  color: #4a5568;
 }
 
 .topbar__notifications:hover {
   background: #f5f7fb;
+  color: #1a2b4a;
 }
 
 .topbar__notifications-icon {
@@ -71,14 +103,17 @@
   position: absolute;
   top: 0;
   right: 0;
-  background: #e74c3c;
+  background: #e53e3e;
   color: white;
-  font-size: 10px;
-  font-weight: bold;
-  padding: 2px 6px;
-  border-radius: 10px;
-  min-width: 18px;
-  text-align: center;
+  font-size: 9px;
+  font-weight: 700;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
 }
 
 .topbar__user {
@@ -103,10 +138,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
-  font-size: 18px;
+  font-weight: 700;
+  font-size: 14px;
   text-transform: uppercase;
   color: white;
+  box-shadow: 0 2px 8px rgba(243, 156, 18, 0.35);
 }
 
 .topbar__user-info {
@@ -132,6 +168,7 @@
   transition: transform 0.2s;
 }
 
+/* Desktop styles */
 @media (min-width: 769px) {
   .topbar {
     left: 280px;
@@ -143,6 +180,7 @@
   }
 }
 
+/* Mobile styles */
 @media (max-width: 768px) {
   .topbar {
     left: 0;
@@ -152,6 +190,18 @@
 
   .topbar__menu-btn {
     display: block;
+  }
+
+  .topbar__salutation {
+    font-size: 16px;
+  }
+
+  .topbar__btn-nouveau span {
+    display: none;
+  }
+  
+  .topbar__btn-nouveau {
+    padding: 10px;
   }
 
   .topbar__user-info {
@@ -165,12 +215,6 @@
   .topbar__user {
     padding: 4px;
   }
-
-  .topbar__notifications-badge {
-    font-size: 9px;
-    padding: 1px 5px;
-    min-width: 16px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -178,8 +222,8 @@
     height: 60px;
   }
 
-  .topbar__breadcrumb-text {
-    font-size: 16px;
+  .topbar__salutation {
+    font-size: 14px;
   }
 
   .topbar__notifications {

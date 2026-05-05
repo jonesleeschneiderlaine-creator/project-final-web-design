@@ -11,6 +11,7 @@ export const useAuth = () => {
     login,
     signup,
     logout,
-    isAuthenticated
+    isAuthenticated,
+    userRole: user?.user_metadata?.role || null,
   };
 };

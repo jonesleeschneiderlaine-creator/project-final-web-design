@@ -25,6 +25,7 @@ export const UserProvider = ({ children }) => {
     logout: auth.signOut,
     resetPassword: auth.resetPassword,
     isAuthenticated: auth.isAuthenticated,
+    userRole: auth.profile?.role || auth.user?.user_metadata?.role || null,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

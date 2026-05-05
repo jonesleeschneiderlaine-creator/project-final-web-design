@@ -1,9 +1,9 @@
 // App.jsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import { AuthProvider } from './contexts/AuthContext';
 import { UserProvider } from './contexts/UserContext';
 import { ProtectedRoute } from './utils/ProtectedRoute';
+import { RoleBasedRedirect } from './utils/RoleBasedRedirect';
 
 import Home from './pages/public/Home/Home';
 import DashboardEns from './pages/plateforme/Dashboard/Enseignant/DashboardEns';
@@ -19,7 +19,6 @@ import Auth from './pages/plateforme/Auth/Auth';
 import ResetPassword from './pages/plateforme/Auth/ResetPassword';
 import ForgotPassword from './pages/plateforme/Auth/ForgotPassword';
 import APropos from './pages/public/APropos/APropos';
-
 
 const App = () => {
   return (
@@ -51,7 +50,14 @@ const App = () => {
               }
             >
               <Route index element={<DashboardEt />} />
-              <Route path="enseignant" element={<DashboardEns />} />
+              <Route 
+                path="enseignant" 
+                element={
+                  <RoleBasedRedirect allowedRoles={['enseignant']}>
+                    <DashboardEns />
+                  </RoleBasedRedirect>
+                } 
+              />
               <Route path="parametres" element={<Parametres />} />
               <Route path="cours" element={<Cours />} />
             </Route>

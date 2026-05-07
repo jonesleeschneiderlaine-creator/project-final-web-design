@@ -1,20 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaShieldAlt, FaBullseye, FaHandshake, FaLock, FaGavel, FaCookie, FaEnvelope } from 'react-icons/fa';
+import { GiCheckMark, GiArchiveResearch, GiSecurityGate } from 'react-icons/gi';
+import { MdPrivacyTip, MdContactMail, MdStorage, MdAnalytics, MdPayment } from 'react-icons/md';
+import { FiDatabase, FiUsers } from 'react-icons/fi';
 import './politiqueConfidentialite.css';
 
 const PolitiqueConfidentialite = () => {
   return (
     <div className="politique-container">
-      {/* ========== BANNER ========== */}
+      
+
       <section className="politique-banner">
-        <h1>🔒 Politique de confidentialité</h1>
+        <h1><FaLock className="banner-icon" /> Politique de confidentialité</h1>
         <p>Comment nous protégeons vos données personnelles</p>
       </section>
 
-      {/* ========== INTRODUCTION ========== */}
+      
       <section className="politique-intro">
         <div className="intro-content">
-          <h2>Notre engagement envers votre vie privée</h2>
+          <h2><MdPrivacyTip className="intro-icon" /> Notre engagement envers votre vie privée</h2>
           <p>
             Chez EduHaïti, la protection de vos données personnelles est une priorité. 
             Cette politique de confidentialité explique comment nous collectons, utilisons, 
@@ -26,52 +31,52 @@ const PolitiqueConfidentialite = () => {
         </div>
       </section>
 
-      {/* ========== SECTION 1 - INFORMATIONS COLLECTÉES ========== */}
+      {/* Section 1 - collecte de données */}
       <section className="politique-section">
         <div className="section-content">
-          <div className="section-icon">📋</div>
+          <div className="section-icon"><MdStorage /></div>
           <h2>1. Informations que nous collectons</h2>
           <div className="info-grid">
             <div className="info-card">
-              <h3>Informations d'inscription</h3>
+              <h3><FiUsers className="card-icon" /> Informations d'inscription</h3>
               <p>Nom, prénom, adresse email, date de naissance, et rôle (enseignant/étudiant)</p>
             </div>
             <div className="info-card">
-              <h3>Données d'apprentissage</h3>
+              <h3><MdAnalytics className="card-icon" /> Données d'apprentissage</h3>
               <p>Progression dans les cours, réponses aux quiz, certifications obtenues</p>
             </div>
             <div className="info-card">
-              <h3>Informations techniques</h3>
+              <h3><GiArchiveResearch className="card-icon" /> Informations techniques</h3>
               <p>Adresse IP, type de navigateur, durée des sessions, et pages visitées</p>
             </div>
             <div className="info-card">
-              <h3>Paiements</h3>
+              <h3><MdPayment className="card-icon" /> Paiements</h3>
               <p>Informations de transaction (nous ne stockons pas vos données bancaires complètes)</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ========== SECTION 2 - UTILISATION ========== */}
+      {/* Section 2 - utilisation données */}
       <section className="politique-section alt-bg">
         <div className="section-content">
-          <div className="section-icon">🎯</div>
+          <div className="section-icon"><FaBullseye /></div>
           <h2>2. Comment nous utilisons vos informations</h2>
           <ul className="usage-list">
-            <li>✓ Fournir et améliorer nos services éducatifs</li>
-            <li>✓ Personnaliser votre expérience d'apprentissage</li>
-            <li>✓ Communiquer les mises à jour importantes et les nouveaux contenus</li>
-            <li>✓ Analyser l'utilisation de la plateforme pour l'améliorer</li>
-            <li>✓ Délivrer des certificats et suivre votre progression</li>
-            <li>✓ Assurer la sécurité de notre plateforme</li>
+            <li><GiCheckMark className="list-icon" /> Fournir et améliorer nos services éducatifs</li>
+            <li><GiCheckMark className="list-icon" /> Personnaliser votre expérience d'apprentissage</li>
+            <li><GiCheckMark className="list-icon" /> Communiquer les mises à jour importantes et les nouveaux contenus</li>
+            <li><GiCheckMark className="list-icon" /> Analyser l'utilisation de la plateforme pour l'améliorer</li>
+            <li><GiCheckMark className="list-icon" /> Délivrer des certificats et suivre votre progression</li>
+            <li><GiCheckMark className="list-icon" /> Assurer la sécurité de notre plateforme</li>
           </ul>
         </div>
       </section>
 
-      {/* ========== SECTION 3 - PARTAGE ========== */}
+      {/* Section 3 - partage des données */}
       <section className="politique-section">
         <div className="section-content">
-          <div className="section-icon">🤝</div>
+          <div className="section-icon"><FaHandshake /></div>
           <h2>3. Partage des données</h2>
           <p>
             Nous ne vendons jamais vos données personnelles. Vos informations peuvent être partagées uniquement dans ces cas :
@@ -83,7 +88,7 @@ const PolitiqueConfidentialite = () => {
             </div>
             <div className="sharing-card">
               <h3>Partenaires de service</h3>
-              <p>Hébergement, analyse de données, traitement des paiements (GDPR compliant)</p>
+              <p>Hébergement, analyse de données, traitement des paiements (RGPD compliant)</p>
             </div>
             <div className="sharing-card">
               <h3>Obligations légales</h3>
@@ -93,36 +98,36 @@ const PolitiqueConfidentialite = () => {
         </div>
       </section>
 
-      {/* ========== SECTION 4 - SÉCURITÉ ========== */}
+      {/* Section 4 - Securite */}
       <section className="politique-section alt-bg">
         <div className="section-content">
-          <div className="section-icon">🛡️</div>
+          <div className="section-icon"><GiSecurityGate /></div>
           <h2>4. Sécurité des données</h2>
           <div className="security-features">
             <div className="security-item">
-              <span className="security-badge">🔐</span>
+              <span className="security-badge"><FaLock /></span>
               <p>Chiffrement SSL/TLS pour toutes les communications</p>
             </div>
             <div className="security-item">
-              <span className="security-badge">📀</span>
+              <span className="security-badge"><GiArchiveResearch /></span>
               <p>Sauvegardes chiffrées quotidiennes</p>
             </div>
             <div className="security-item">
-              <span className="security-badge">👥</span>
+              <span className="security-badge"><FiUsers /></span>
               <p>Accès restreint aux données personnelles</p>
             </div>
             <div className="security-item">
-              <span className="security-badge">✅</span>
+              <span className="security-badge"><FaShieldAlt /></span>
               <p>Audits de sécurité réguliers</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ========== SECTION 5 - VOS DROITS ========== */}
+      {/* Section 5 - vos droits */}
       <section className="politique-section">
         <div className="section-content">
-          <div className="section-icon">⚖️</div>
+          <div className="section-icon"><FaGavel /></div>
           <h2>5. Vos droits</h2>
           <p>Conformément au RGPD et aux lois haïtiennes, vous avez le droit de :</p>
           <div className="rights-grid">
@@ -139,10 +144,10 @@ const PolitiqueConfidentialite = () => {
         </div>
       </section>
 
-      {/* ========== SECTION 6 - COOKIES ========== */}
+      {/* Section 6 - cookies */}
       <section className="politique-section alt-bg">
         <div className="section-content">
-          <div className="section-icon">🍪</div>
+          <div className="section-icon"><FaCookie /></div>
           <h2>6. Cookies et technologies similaires</h2>
           <p>
             Nous utilisons des cookies pour améliorer votre expérience sur notre plateforme :
@@ -158,10 +163,10 @@ const PolitiqueConfidentialite = () => {
         </div>
       </section>
 
-      {/* ========== SECTION 7 - CONTACT ========== */}
+      {/* Section 7 - Nous Contacter */}
       <section className="politique-contact">
         <div className="contact-content">
-          <h2>Des questions ?</h2>
+          <h2><MdContactMail className="contact-icon" /> Des questions ?</h2>
           <p>
             Si vous avez des questions concernant cette politique de confidentialité 
             ou le traitement de vos données, n'hésitez pas à nous contacter.
@@ -171,13 +176,11 @@ const PolitiqueConfidentialite = () => {
               <button className="btn contact-btn">Nous contacter</button>
             </Link>
             <a href="mailto:privacy@eduhaïti.ht">
-              <button className="btn email-btn">privacy@eduhaïti.ht</button>
+              <button className="btn email-btn"><FaEnvelope /> privacy@eduhaïti.ht</button>
             </a>
           </div>
         </div>
       </section>
-
-      
     </div>
   );
 };

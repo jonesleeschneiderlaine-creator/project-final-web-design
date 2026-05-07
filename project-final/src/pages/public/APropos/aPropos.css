@@ -10,73 +10,7 @@
     min-height: 100vh;
 }
 
-/* ========== NAVBAR ========== */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 60px;
-    background: #0b1f3a;
-    color: white;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
-    letter-spacing: 1px;
-}
-
-.navbar nav a {
-    margin: 0 15px;
-    color: white;
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.navbar nav a:hover,
-.navbar nav a.active {
-    color: #f39c12;
-}
-
-.auth {
-    display: flex;
-    gap: 10px;
-}
-
-.btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.2s;
-}
-
-.login {
-    background: #e74c3c;
-    color: white;
-}
-
-.login:hover {
-    background: #c0392b;
-    transform: scale(1.02);
-}
-
-.register {
-    background: #2ecc71;
-    color: white;
-}
-
-.register:hover {
-    background: #27ae60;
-    transform: scale(1.02);
-}
-
-/* ========== BANNER ========== */
+/* Hero banner - makes a strong first impression */
 .banner {
     background: linear-gradient(135deg, #0b1f3a, #0f4c81);
     color: white;
@@ -87,6 +21,14 @@
 .banner h1 {
     font-size: 2.5rem;
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.banner-icon {
+    font-size: 2.5rem;
 }
 
 .banner p {
@@ -94,7 +36,7 @@
     opacity: 0.9;
 }
 
-/* ========== MISSION ========== */
+/* Mission section - explains why we built this */
 .mission {
     display: flex;
     align-items: center;
@@ -112,6 +54,13 @@
     font-size: 2rem;
     color: #0b1f3a;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-icon {
+    color: #1e6bd6;
 }
 
 .mission-text p {
@@ -136,7 +85,7 @@
     transform: scale(1.02);
 }
 
-/* ========== VALEURS ========== */
+/* Values section - our guiding principles */
 .values {
     padding: 60px;
     text-align: center;
@@ -173,6 +122,7 @@
 .value-icon {
     font-size: 3rem;
     margin-bottom: 15px;
+    color: #1e6bd6;
 }
 
 .value-card h3 {
@@ -187,7 +137,7 @@
     line-height: 1.5;
 }
 
-/* ========== EQUIPE ========== */
+/* Team section - faces behind the platform */
 .team {
     padding: 60px;
     background: white;
@@ -198,6 +148,10 @@
     font-size: 2rem;
     color: #0b1f3a;
     margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .team-grid {
@@ -219,7 +173,28 @@
     transform: translateY(-5px);
 }
 
-.team-img, .team-img2, .team-img3 {
+.team-card h3 {
+    color: #0b1f3a;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.team-icon {
+    font-size: 1rem;
+    color: #1e6bd6;
+}
+
+.team-card p {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* Team member photos - professional headshots */
+.team-img, .team-img2, .team-img3, .team-img4 {
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -230,10 +205,11 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-.team-img:hover, .team-img2:hover, .team-img3:hover {
+.team-img:hover, .team-img2:hover, .team-img3:hover, .team-img4:hover {
     transform: scale(1.05);
 }
 
+/* Different photos for each team member */
 .team-img {
     background-image: url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop');
 }
@@ -243,92 +219,17 @@
 .team-img3 {
     background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop');
 }
-
-.team-card h3 {
-    color: #0b1f3a;
-    margin-bottom: 5px;
-    font-size: 1.1rem;
-}
-
-.team-card p {
-    color: #888;
-    font-size: 0.9rem;
-}
-
-/* Ajoute cette classe avec les autres .team-img */
-.team-img4 {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin: 0 auto 15px;
-    background-size: cover;
-    background-position: center;
-    transition: transform 0.3s;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.team-img4:hover {
-    transform: scale(1.05);
-}
-
 .team-img4 {
     background-image: url('https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop');
 }
 
-
-/* ========== FOOTER ========== */
-.footer {
-    background: #0b1f3a;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 30px;
-    padding: 40px 60px;
-    margin-top: 0;
-}
-
-.footer-left h3 {
-    font-size: 1.5rem;
-    margin-bottom: 8px;
-}
-
-.footer-left p {
-    opacity: 0.8;
-    font-size: 0.9rem;
-}
-
-.footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.footer-links a {
-    color: white;
-    text-decoration: none;
-    opacity: 0.8;
-    transition: opacity 0.2s;
-}
-
-.footer-links a:hover {
-    opacity: 1;
-    text-decoration: underline;
-}
-
-/* ========== RESPONSIVE ========== */
+/* Responsive design - keeps everything readable on mobile */
 @media (max-width: 768px) {
-    .navbar {
-        padding: 15px 20px;
-        justify-content: center;
-        text-align: center;
-    }
-    
-    .navbar nav a {
-        margin: 0 10px;
-    }
-    
     .banner h1 {
+        font-size: 1.8rem;
+    }
+    
+    .banner-icon {
         font-size: 1.8rem;
     }
     
@@ -358,22 +259,32 @@
         font-size: 1.6rem;
     }
     
-    .footer {
-        padding: 30px 25px;
-        text-align: center;
-        justify-content: center;
-    }
-    
-    .footer-links {
-        justify-content: center;
-    }
-    
     .team-card {
         width: 180px;
     }
     
-    .team-img, .team-img2, .team-img3 {
+    .team-img, .team-img2, .team-img3, .team-img4 {
         width: 120px;
         height: 120px;
+    }
+    
+    .team-card h3 {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .values-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .team-grid {
+        gap: 25px;
+    }
+    
+    .team-card {
+        width: 100%;
+        max-width: 200px;
     }
 }

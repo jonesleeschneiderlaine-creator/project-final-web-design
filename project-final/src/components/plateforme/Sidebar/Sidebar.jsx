@@ -56,7 +56,7 @@ const Sidebar = ({ isOpen, onClose }) => {
     return user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'Utilisateur';
   };
 
-  const roleLabel = userRole === 'enseignant' ? 'Enseignante' : 'Étudiant';
+  const roleLabel = userRole === 'enseignant' ? 'Enseignant' : 'Étudiant';
 
   return (
     <>

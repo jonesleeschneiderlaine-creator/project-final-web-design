@@ -10,7 +10,7 @@
     min-height: 100vh;
 }
 
-/* ========== BANNER ========== */
+/* Bannière - en-tête visuel */
 .politique-banner {
     background: linear-gradient(135deg, #0b1f3a, #0f4c81);
     color: white;
@@ -21,6 +21,14 @@
 .politique-banner h1 {
     font-size: 2.5rem;
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.banner-icon {
+    font-size: 2.5rem;
 }
 
 .politique-banner p {
@@ -28,7 +36,7 @@
     opacity: 0.9;
 }
 
-/* ========== INTRODUCTION ========== */
+/* Intro - contexte général */
 .politique-intro {
     background: white;
     padding: 50px 60px;
@@ -44,6 +52,14 @@
     font-size: 1.8rem;
     color: #0b1f3a;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.intro-icon {
+    color: #1e6bd6;
 }
 
 .intro-content p {
@@ -53,7 +69,7 @@
     font-size: 1rem;
 }
 
-/* ========== SECTIONS GÉNÉRALES ========== */
+/* Sections générales */
 .politique-section {
     padding: 60px;
 }
@@ -71,6 +87,7 @@
     font-size: 2.5rem;
     margin-bottom: 20px;
     text-align: center;
+    color: #1e6bd6;
 }
 
 .section-content h2 {
@@ -86,7 +103,7 @@
     margin-bottom: 20px;
 }
 
-/* ========== INFO GRID ========== */
+/* Grille d'infos - cartes */
 .info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -107,6 +124,11 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
 }
 
+.card-icon {
+    margin-right: 8px;
+    color: #1e6bd6;
+}
+
 .info-card h3 {
     color: #1e6bd6;
     margin-bottom: 12px;
@@ -120,7 +142,7 @@
     margin-bottom: 0;
 }
 
-/* ========== USAGE LIST ========== */
+/* Liste d'utilisation */
 .usage-list {
     list-style: none;
     padding: 0;
@@ -133,13 +155,21 @@
     color: #555;
     font-size: 1rem;
     border-bottom: 1px solid #e0e4e8;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .usage-list li:last-child {
     border-bottom: none;
 }
 
-/* ========== SHARING GRID ========== */
+.list-icon {
+    color: #2ecc71;
+    font-size: 1.1rem;
+}
+
+/* Grille de partage */
 .sharing-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -166,7 +196,7 @@
     margin-bottom: 0;
 }
 
-/* ========== SECURITY FEATURES ========== */
+/* Fonctionnalités de sécurité */
 .security-features {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -186,6 +216,9 @@
 
 .security-badge {
     font-size: 1.8rem;
+    color: #1e6bd6;
+    display: flex;
+    align-items: center;
 }
 
 .security-item p {
@@ -194,7 +227,7 @@
     font-weight: 500;
 }
 
-/* ========== RIGHTS GRID ========== */
+/* Grille des droits */
 .rights-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -227,7 +260,7 @@
     margin-top: 20px;
 }
 
-/* ========== COOKIES LIST ========== */
+/* Liste des cookies */
 .cookies-list {
     list-style: none;
     padding: 0;
@@ -244,7 +277,7 @@
     color: #0b1f3a;
 }
 
-/* ========== CONTACT SECTION ========== */
+/* Section contact - CTA final */
 .politique-contact {
     background: linear-gradient(135deg, #0f4c81, #0b1f3a);
     color: white;
@@ -260,6 +293,14 @@
 .contact-content h2 {
     font-size: 2rem;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.contact-icon {
+    font-size: 2rem;
 }
 
 .contact-content p {
@@ -283,6 +324,9 @@
     cursor: pointer;
     font-weight: bold;
     transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .contact-btn {
@@ -300,7 +344,7 @@
     color: white;
     border: 1px solid white;
     text-decoration: none;
-    display: inline-block;
+    display: inline-flex;
 }
 
 .email-btn:hover {
@@ -308,17 +352,7 @@
     transform: scale(1.02);
 }
 
-/* ========== FOOTER NOTE ========== */
-.politique-footer-note {
-    text-align: center;
-    padding: 25px;
-    background: white;
-    color: #888;
-    font-size: 0.9rem;
-    border-top: 1px solid #e0e4e8;
-}
-
-/* ========== RESPONSIVE ========== */
+/* Responsive - pour mobile */
 @media (max-width: 768px) {
     .politique-banner h1 {
         font-size: 1.8rem;
@@ -344,7 +378,7 @@
     }
     
     .rights-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     }
     
     .politique-contact {
@@ -358,5 +392,20 @@
     .security-item {
         flex-direction: column;
         text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .rights-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-buttons {
+        flex-direction: column;
+    }
+    
+    .contact-btn, .email-btn {
+        width: 100%;
+        justify-content: center;
     }
 }

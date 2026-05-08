@@ -14,5 +14,3 @@ Ce projet de groupe a été réalisé par
 - **Frontend** : ReactJS + Vite, React Router, Supabase JS Client
 - **Backend** : Supabase (Auth, DB)
 - **Icones** : React Icons
-
-## Desc

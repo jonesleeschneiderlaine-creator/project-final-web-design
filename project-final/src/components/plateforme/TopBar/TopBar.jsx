@@ -41,7 +41,7 @@ const TopBar = ({ onMenuClick }) => {
         </div>
 
         <div className="topbar__right">
-          {/* Only show Nouveau cours button on enseignant dashboard */}
+          {/* Btn nouveau cours — enseignant seulement */}
           {window.location.pathname.includes('/plateforme/enseignant') && (
             <button
               className="topbar__btn-nouveau"

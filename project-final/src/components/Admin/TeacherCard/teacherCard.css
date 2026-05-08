@@ -1,0 +1,208 @@
+/* src/components/Admin/TeacherCard/teacherCard.css */
+
+.teacher-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.teacher-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 25px;
+  cursor: pointer;
+  background: #f8fafc;
+  transition: background 0.2s;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.teacher-card__header:hover {
+  background: #f1f5f9;
+}
+
+.teacher-card__info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.teacher-card__avatar {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #1e6bd6, #0f4c81);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.teacher-card__info h3 {
+  color: #0b1f3a;
+  margin: 0 0 4px;
+}
+
+.teacher-card__email {
+  color: #64748b;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.teacher-card__stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.teacher-card__stat {
+  text-align: center;
+  padding: 8px 15px;
+  background: white;
+  border-radius: 12px;
+  min-width: 65px;
+}
+
+.teacher-card__stat-num {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0b1f3a;
+}
+
+.teacher-card__stat-num--green  { color: #2ecc71; }
+.teacher-card__stat-num--orange { color: #f39c12; }
+
+.teacher-card__stat-label {
+  font-size: 0.65rem;
+  color: #64748b;
+}
+
+.teacher-card__warn-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: #fff3e0;
+  color: #f39c12;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.8rem;
+  transition: all 0.15s;
+}
+
+.teacher-card__warn-btn:hover {
+  background: #f39c12;
+  color: white;
+}
+
+/* ── Vidéos ──────────────────────────────────────────────────────── */
+
+.teacher-card__videos {
+  padding: 20px 25px;
+  border-top: 1px solid #eef2f7;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.teacher-card__video {
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  background: #f8fafc;
+  border-radius: 16px;
+  transition: background 0.2s;
+}
+
+.teacher-card__video:hover {
+  background: #f1f5f9;
+}
+
+.teacher-card__video--hidden {
+  opacity: 0.7;
+  background: #fff3e0;
+}
+
+.teacher-card__video-thumb {
+  width: 120px;
+  height: 80px;
+  background: #1e293b;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.teacher-card__video-badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #f39c12;
+  color: white;
+  font-size: 0.6rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+.teacher-card__video-info h4 {
+  color: #0b1f3a;
+  margin: 0 0 5px;
+  font-size: 0.9rem;
+}
+
+.teacher-card__video-info p {
+  font-size: 0.7rem;
+  color: #64748b;
+  margin: 0 0 8px;
+}
+
+.teacher-card__video-until {
+  color: #f39c12 !important;
+  font-size: 0.65rem;
+  margin-bottom: 8px;
+}
+
+.teacher-card__video-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.teacher-card__video-actions button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.7rem;
+  font-weight: 500;
+  background: #fee2e2;
+  color: #e74c3c;
+  transition: all 0.15s;
+}
+
+.teacher-card__video-actions button:hover {
+  background: #e74c3c;
+  color: white;
+}
+
+.teacher-card__empty {
+  text-align: center;
+  padding: 40px;
+  color: #94a3b8;
+  grid-column: 1 / -1;
+}

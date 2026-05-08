@@ -1,0 +1,50 @@
+/* src/components/Admin/LogList/logList.css */
+
+.log-list {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.log-list__entry {
+  padding: 12px;
+  border-bottom: 1px solid #eef2f7;
+  display: flex;
+  gap: 15px;
+  font-size: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.log-list__time {
+  color: #94a3b8;
+  min-width: 130px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.log-list__action {
+  font-weight: 600;
+  color: #0b1f3a;
+  min-width: 120px;
+}
+
+.log-list__user {
+  color: #1e6bd6;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.log-list__detail {
+  color: #475569;
+  flex: 1;
+}
+
+.log-list__empty {
+  text-align: center;
+  padding: 40px;
+  color: #94a3b8;
+}

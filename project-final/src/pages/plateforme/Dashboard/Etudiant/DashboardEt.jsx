@@ -1,10 +1,10 @@
 // src/pages/plateforme/Dashboard/Etudiant/DashboardEt.jsx
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../../../../contexts/AuthContext';
+import { useAuth } from '../../../../hooks/useAuth';
 import "./dashboardEt.css";
 
 const DashboardEt = () => {
-  const { userRole, loading } = useAuth();
+  const { role, loading } = useAuth();
 
   if (loading) {
     return (
@@ -15,8 +15,7 @@ const DashboardEt = () => {
     );
   }
 
-  // If user is enseignant, redirect to enseignant dashboard
-  if (userRole === 'enseignant') {
+  if (role === 'enseignant') {
     return <Navigate to="/plateforme/enseignant" replace />;
   }
 

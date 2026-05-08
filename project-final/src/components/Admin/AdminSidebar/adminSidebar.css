@@ -1,0 +1,104 @@
+/* src/components/Admin/AdminSidebar/adminSidebar.css */
+
+.admin-sidebar {
+  width: 280px;
+  background: linear-gradient(180deg, #0b1f3a, #0f4c81);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset: 0 auto 0 0;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.admin-sidebar__brand {
+  padding: 30px 25px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.admin-sidebar__brand h2 {
+  font-size: 1.5rem;
+  margin: 0 0 6px;
+}
+
+.admin-sidebar__role {
+  font-size: 0.75rem;
+  background: #f39c12;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.admin-sidebar__nav {
+  flex: 1;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.admin-sidebar__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 25px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.75);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+  width: 100%;
+}
+
+.admin-sidebar__item:hover {
+  background: rgba(255,255,255,0.08);
+  color: white;
+}
+
+.admin-sidebar__item--active {
+  background: #1e6bd6;
+  color: white;
+  border-left: 4px solid #f39c12;
+}
+
+.admin-sidebar__footer {
+  padding: 20px 25px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.admin-sidebar__logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  background: rgba(231,76,60,0.8);
+  color: white;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.admin-sidebar__logout:hover {
+  background: #e74c3c;
+}
+
+@media (max-width: 1000px) {
+  .admin-sidebar {
+    width: 80px;
+  }
+  .admin-sidebar__brand h2,
+  .admin-sidebar__brand .admin-sidebar__role,
+  .admin-sidebar__item span,
+  .admin-sidebar__logout span {
+    display: none;
+  }
+  .admin-sidebar__item {
+    justify-content: center;
+    padding: 15px 0;
+  }
+}

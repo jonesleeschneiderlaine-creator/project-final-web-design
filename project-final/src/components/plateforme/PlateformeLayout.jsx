@@ -8,15 +8,10 @@ import './plateformeLayout.css';
 
 const PlateformeLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const { isAuthenticated, loading, userRole } = useAuth();
+  const { isAuthenticated, loading } = useAuth(); // plus besoin de role ici
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
-  const closeSidebar = () => {
-    setIsSidebarOpen(false);
-  };
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const closeSidebar = () => setIsSidebarOpen(false);
 
   if (loading) {
     return (
@@ -33,9 +28,8 @@ const PlateformeLayout = () => {
 
   return (
     <div className="plateforme-layout">
-      <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} userRole={userRole} />
+      <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
       <TopBar onMenuClick={toggleSidebar} />
-      
       <main className="plateforme-layout__main">
         <div className="plateforme-layout__content">
           <Outlet />

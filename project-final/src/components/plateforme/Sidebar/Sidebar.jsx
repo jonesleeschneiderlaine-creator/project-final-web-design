@@ -5,12 +5,12 @@ import { FiX } from 'react-icons/fi';
 import './sidebar.css';
 
 const Sidebar = ({ isOpen, onClose }) => {
-  const { user, logout, userRole } = useAuth();
+  const { user, signOut, role } = useAuth();
   const navigate = useNavigate();
 
-  // Dynamic menu items based on role
+  // ── Menu selon rôle ─────────────────────────────────────────────
   const getMenuItems = () => {
-    if (userRole === 'enseignant') {
+    if (role === 'enseignant') {
       return [
         { path: '/plateforme',                          emoji: '🏠',  label: 'Tableau de bord' },
         { path: '/plateforme/cours',                    emoji: '📋',  label: 'Mes cours' },
@@ -21,7 +21,6 @@ const Sidebar = ({ isOpen, onClose }) => {
       ];
     }
 
-    // Étudiant
     return [
       { path: '/plateforme',                        emoji: '🏠',  label: 'Tableau de bord' },
       { path: '/plateforme/cours',                  emoji: '📋',  label: 'Mes cours' },
@@ -34,11 +33,11 @@ const Sidebar = ({ isOpen, onClose }) => {
   const menuItems = getMenuItems();
 
   const handleLogout = async () => {
-    await logout();
+    await signOut();
     navigate('/connexion');
   };
 
-  // Get user initials for avatar
+  // ── Initiales avatar ────────────────────────────────────────────
   const getUserInitials = () => {
     if (user?.user_metadata?.full_name) {
       return user.user_metadata.full_name
@@ -51,18 +50,18 @@ const Sidebar = ({ isOpen, onClose }) => {
     return user?.email?.charAt(0).toUpperCase() || 'U';
   };
 
-  // Get user display name
+  // ── Nom affiché ─────────────────────────────────────────────────
   const getUserName = () => {
     return user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'Utilisateur';
   };
 
-  const roleLabel = userRole === 'enseignant' ? 'Enseignant' : 'Étudiant';
+  const roleLabel = role === 'enseignant' ? 'Enseignant' : 'Étudiant';
 
   return (
     <>
       {isOpen && <div className="sidebar__overlay" onClick={onClose} />}
 
-      <aside className={`sidebar sidebar--${userRole === 'enseignant' ? 'enseignant' : 'etudiant'} ${isOpen ? 'sidebar--open' : ''}`}>
+      <aside className={`sidebar sidebar--${role === 'enseignant' ? 'enseignant' : 'etudiant'} ${isOpen ? 'sidebar--open' : ''}`}>
 
         {/* ── Logo ─────────────────────────────────────────────── */}
         <div className="sidebar__header">
@@ -75,12 +74,12 @@ const Sidebar = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        {/* ── Étiquette de rôle (enseignant uniquement) ─────────── */}
-        {userRole === 'enseignant' && (
+        {/* ── Badge rôle ───────────────────────────────────────── */}
+        {role === 'enseignant' && (
           <div className="sidebar__role-label">ENSEIGNANT</div>
         )}
 
-        {/* ── Navigation ───────────────────────────────────────── */}
+        {/* ── Nav ──────────────────────────────────────────────── */}
         <nav className="sidebar__nav">
           {menuItems.map((item) => (
             <NavLink
@@ -97,10 +96,10 @@ const Sidebar = ({ isOpen, onClose }) => {
           ))}
         </nav>
 
-        {/* ── Pied de page ─────────────────────────────────────── */}
+        {/* ── Footer ───────────────────────────────────────────── */}
         <div className="sidebar__footer">
           <div className="sidebar__user">
-            <div className={`sidebar__user-avatar sidebar__user-avatar--${userRole === 'enseignant' ? 'enseignant' : 'etudiant'}`}>
+            <div className={`sidebar__user-avatar sidebar__user-avatar--${role === 'enseignant' ? 'enseignant' : 'etudiant'}`}>
               {getUserInitials()}
             </div>
             <div className="sidebar__user-info">
@@ -120,4 +119,3 @@ const Sidebar = ({ isOpen, onClose }) => {
 };
 
 export default Sidebar;
-

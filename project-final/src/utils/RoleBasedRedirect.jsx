@@ -1,9 +1,9 @@
 // src/utils/RoleBasedRedirect.jsx
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../hooks/useAuth';
 
 export const RoleBasedRedirect = ({ children, allowedRoles }) => {
-  const { isAuthenticated, loading, userRole } = useAuth();
+  const { isAuthenticated, loading, role } = useAuth();
 
   if (loading) {
     return (
@@ -18,25 +18,23 @@ export const RoleBasedRedirect = ({ children, allowedRoles }) => {
     return <Navigate to="/connexion" replace />;
   }
 
-  // If allowedRoles is provided, check if user has permission
-  if (allowedRoles && !allowedRoles.includes(userRole)) {
-    // Redirect to the appropriate dashboard
-    if (userRole === 'enseignant') {
-      return <Navigate to="/plateforme/enseignant" replace />;
-    }
-    return <Navigate to="/plateforme" replace />;
+  if (allowedRoles && !allowedRoles.includes(role)) {
+    // Rediriger selon le rôle
+    if (role === 'enseignant') return <Navigate to="/plateforme/enseignant" replace />;
+    if (role === 'etudiant')  return <Navigate to="/plateforme" replace />;
+    if (role === 'admin')     return <Navigate to="/admin" replace />;
+    return <Navigate to="/connexion" replace />;
   }
 
   return children;
 };
 
-// Hook to get dashboard path based on role
 export const useDashboardPath = () => {
-  const { userRole, loading } = useAuth();
+  const { role, loading } = useAuth();
   
   if (loading) return '/plateforme';
   
-  switch (userRole) {
+  switch (role) {
     case 'enseignant':
       return '/plateforme/enseignant';
     case 'etudiant':

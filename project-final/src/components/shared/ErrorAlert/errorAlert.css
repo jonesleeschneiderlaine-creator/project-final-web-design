@@ -1,0 +1,57 @@
+/* src/components/shared/ErrorAlert/errorAlert.css
+   ─── Alerte erreur ───────────────────────────────────────────── */
+
+.error-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-left: 4px solid #ef4444;
+  border-radius: 10px;
+  color: #991b1b;
+  font-size: 14px;
+  line-height: 1.5;
+  animation: error-alert-in 0.25s ease-out;
+}
+
+@keyframes error-alert-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.error-alert__icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: #ef4444;
+}
+
+.error-alert__message {
+  flex: 1;
+  margin: 0;
+}
+
+.error-alert__close {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #991b1b;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.error-alert__close:hover {
+  background: #fecaca;
+}

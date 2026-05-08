@@ -1,6 +1,7 @@
 // src/components/plateforme/SignIn/SignIn.jsx
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ErrorAlert } from '../../shared/ErrorAlert/ErrorAlert';
 import { 
   FiMail, 
   FiLock, 
@@ -23,6 +24,7 @@ const SignIn = ({ onSuccess, onSwitchToSignUp }) => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
   const validateForm = () => {
     const newErrors = {};
@@ -45,6 +47,7 @@ const SignIn = ({ onSuccess, onSwitchToSignUp }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    // ── Clear field error on change ──────────────────────────────
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
@@ -55,11 +58,17 @@ const SignIn = ({ onSuccess, onSwitchToSignUp }) => {
     if (!validateForm()) return;
     
     setLoading(true);
+    setSubmitError(null);
+    
+    console.log('9. handleSubmit — avant onSuccess');
     try {
       await onSuccess(formData.email, formData.password);
+      console.log('10. onSuccess terminé');
     } catch (error) {
-      setErrors({ submit: error.message });
+      console.log('11. catch dans handleSubmit');
+      setSubmitError(error);
     } finally {
+      console.log('12. finally — setLoading(false)');
       setLoading(false);
     }
   };
@@ -73,11 +82,12 @@ const SignIn = ({ onSuccess, onSwitchToSignUp }) => {
       </div>
 
       <form className="signin__form" onSubmit={handleSubmit}>
-        {errors.submit && (
-          <div className="signin__error-global">
-            {errors.submit}
-          </div>
-        )}
+        {/* ── Erreur submit ─────────────────────────────────────── */}
+        <ErrorAlert
+          key={submitError?.message || submitError}
+          error={submitError}
+          onDismiss={() => setSubmitError(null)}
+        />
 
         <div className="signin__form-group">
           <label htmlFor="email" className="signin__label">

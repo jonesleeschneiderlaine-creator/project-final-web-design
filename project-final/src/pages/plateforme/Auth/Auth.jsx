@@ -5,7 +5,6 @@ import { useAuth } from '../../../hooks/useAuth';
 import SignIn from '../../../components/plateforme/SignIn/SignIn';
 import CreateAccount from '../../../components/plateforme/CreateAccount/CreateAccount';
 import { FiGrid, FiMail } from 'react-icons/fi';
-import { supabase } from '../../../lib/supabaseClient'; // ADD THIS IMPORT
 import './auth.css';
 
 const Auth = ({ defaultMode = 'signin' }) => {
@@ -14,16 +13,24 @@ const Auth = ({ defaultMode = 'signin' }) => {
   const [verificationEmail, setVerificationEmail] = useState('');
   const [resendMessage, setResendMessage] = useState('');
   const [resendError, setResendError] = useState('');
-  const { login, signup } = useAuth();
+  const { signIn, signUp, resendVerification } = useAuth();
   const navigate = useNavigate();
 
   const handleLogin = async (email, password) => {
-    await login(email, password);
-    navigate('/plateforme');
-  };
+  // eslint-disable-next-line no-useless-catch
+  try {
+    const result = await signIn(email, password);
+    const role = result?.user?.user_metadata?.role;
+    if (role === 'enseignant') navigate('/plateforme/enseignant');
+    else if (role === 'admin') navigate('/admin');
+    else navigate('/plateforme');
+  } catch (error) {
+    throw error;
+  }
+};
 
   const handleSignup = async (email, password, userData) => {
-    const result = await signup(email, password, userData);
+    const result = await signUp(email, password, userData);
     
     if (result?.requiresEmailConfirmation || result?.user?.identities?.length === 0) {
       setVerificationEmail(email);
@@ -33,18 +40,12 @@ const Auth = ({ defaultMode = 'signin' }) => {
     }
   };
 
-  // ADD THIS FUNCTION HERE
+  // ── Renvoi email vérif ──────────────────────────────────────────
   const handleResendVerification = async () => {
     setResendMessage('');
     setResendError('');
     try {
-      await supabase.auth.resend({
-        type: 'signup',
-        email: verificationEmail,
-        options: {
-          emailRedirectTo: `${window.location.origin}/connexion`
-        }
-      });
+      await resendVerification(verificationEmail);
       setResendMessage('Email de vérification renvoyé ! Vérifiez votre boîte de réception.');
       setTimeout(() => setResendMessage(''), 5000);
     } catch (error) {
@@ -53,7 +54,7 @@ const Auth = ({ defaultMode = 'signin' }) => {
     }
   };
 
-  // If showing verification message
+  // ── Écran vérif email ───────────────────────────────────────────
   if (showVerification) {
     return (
       <div className="auth-page">
@@ -89,7 +90,6 @@ const Auth = ({ defaultMode = 'signin' }) => {
                 </p>
               </div>
 
-              {/* ADD THE RESEND BUTTON HERE */}
               <button 
                 onClick={handleResendVerification}
                 className="signin__submit"
@@ -102,7 +102,6 @@ const Auth = ({ defaultMode = 'signin' }) => {
                 Renvoyer l'email de vérification
               </button>
 
-              {/* Success/Error messages */}
               {resendMessage && (
                 <div style={{ 
                   background: '#d4edda', 
@@ -129,12 +128,10 @@ const Auth = ({ defaultMode = 'signin' }) => {
                 </div>
               )}
               
-              
               <button 
                 onClick={() => {
                   setShowVerification(false);
                   setMode('signin');
-                  // Clear any form data or errors if needed
                 }}
                 className="signin__submit"
                 style={{ width: '100%', marginBottom: '12px' }}

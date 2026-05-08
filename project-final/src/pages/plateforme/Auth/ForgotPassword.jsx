@@ -1,7 +1,7 @@
 // src/pages/plateforme/Auth/ForgotPassword.jsx
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../../contexts/AuthContext';
+import { useAuth } from '../../../hooks/useAuth';
 import { FiMail, FiArrowLeft } from 'react-icons/fi';
 import './auth.css';
 

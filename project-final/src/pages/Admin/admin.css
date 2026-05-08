@@ -1,0 +1,170 @@
+/* src/pages/plateforme/Admin/admin.css */
+
+.admin-page {
+  display: flex;
+  min-height: 100vh;
+  background: #f0f2f5;
+}
+
+.admin-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 1.2rem;
+  color: #64748b;
+}
+
+/* ── Main ────────────────────────────────────────────────────────── */
+
+.admin-main {
+  flex: 1;
+  margin-left: 280px;
+  padding: 25px 35px;
+}
+
+.admin-main__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.admin-main__header h1 {
+  color: #0b1f3a;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.admin-main__date {
+  color: #64748b;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+/* ── Sections ────────────────────────────────────────────────────── */
+
+.admin-main__section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.admin-main__section-head h2 {
+  color: #0b1f3a;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.admin-main__search input {
+  padding: 10px 15px;
+  border: 2px solid #e1e5eb;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  width: 280px;
+}
+
+.admin-main__btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  background: #1e6bd6;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.admin-main__teachers {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.admin-main__reports {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.admin-main__empty {
+  text-align: center;
+  padding: 60px;
+  color: #94a3b8;
+  background: white;
+  border-radius: 20px;
+}
+
+/* ── Boutons modals ──────────────────────────────────────────────── */
+
+.admin-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.admin-btn--cancel { background: #e2e8f0; color: #64748b; }
+.admin-btn--danger { background: #e74c3c; color: white; }
+.admin-btn--warn   { background: #f39c12; color: white; }
+
+/* ── Modal interne ───────────────────────────────────────────────── */
+
+.admin-modal__warning {
+  background: #fee2e2;
+  color: #e74c3c;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.admin-main label {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.85rem;
+}
+
+.admin-main label select,
+.admin-main label textarea,
+.admin-main label input {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border: 2px solid #e1e5eb;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.admin-main label select:focus,
+.admin-main label textarea:focus,
+.admin-main label input:focus {
+  outline: none;
+  border-color: #1e6bd6;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────── */
+
+@media (max-width: 1000px) {
+  .admin-main { margin-left: 80px; }
+}
+
+@media (max-width: 768px) {
+  .admin-main { padding: 20px 15px; }
+  .admin-main__search input { width: 100%; }
+}

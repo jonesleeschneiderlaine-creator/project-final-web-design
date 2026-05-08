@@ -12,14 +12,15 @@ import {
 import './userMenu.css';
 
 const UserMenu = ({ isOpen, onClose }) => {
-  const { user, logout } = useAuth();
+  const { user, signOut } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await logout();
+    await signOut();
     navigate('/connexion');
     onClose();
   };
+
 
   if (!isOpen) return null;
 

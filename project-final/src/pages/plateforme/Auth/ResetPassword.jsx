@@ -1,8 +1,9 @@
 // src/pages/plateforme/Auth/ResetPassword.jsx
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../../contexts/AuthContext';
-import { FiLock, FiEye, FiEyeOff, FiCheck } from 'react-icons/fi';
+import { useAuth } from '../../../hooks/useAuth';
+import { supabase } from '../../../lib/supabaseClient';
+import { FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
 import './auth.css';
 
 const ResetPassword = () => {
@@ -15,7 +16,7 @@ const ResetPassword = () => {
   const { updatePassword } = useAuth();
   const navigate = useNavigate();
 
-  // Check if we have a valid reset session
+  // ── Vérif session reset valide ──────────────────────────────────
   useEffect(() => {
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();

@@ -1,7 +1,6 @@
 // App.jsx
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './contexts/AuthContext';
-import { UserProvider } from './contexts/UserContext';
+import { AuthProvider } from './contexts/AuthProvider';
 import { ProtectedRoute } from './utils/ProtectedRoute';
 import { RoleBasedRedirect } from './utils/RoleBasedRedirect';
 
@@ -19,14 +18,14 @@ import Auth from './pages/plateforme/Auth/Auth';
 import ResetPassword from './pages/plateforme/Auth/ResetPassword';
 import ForgotPassword from './pages/plateforme/Auth/ForgotPassword';
 import APropos from './pages/public/APropos/APropos';
+import Admin from './pages/Admin/Admin';
 
 const App = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <UserProvider>
           <Routes>
-            {/* PUBLIC ROUTES - with RootLayout */}
+            {/* PUBLIC */}
             <Route path="/" element={<RootLayout />}>
               <Route index element={<Home />} />
               <Route path="apropos" element={<APropos />} />
@@ -34,13 +33,25 @@ const App = () => {
               <Route path="politique-confidentialite" element={<PolitiqueConfidentialite />} />
             </Route>
 
-            {/* AUTH ROUTE - No layout needed */}
+            {/* AUTH */}
             <Route path="/connexion" element={<Auth />} />
             <Route path="/inscription" element={<Auth defaultMode="signup" />} />
             <Route path="/mot-de-passe-oublie" element={<ForgotPassword />} />
             <Route path="/reset-password" element={<ResetPassword />} />
 
-            {/* PLATEFORME ROUTES - Protected */}
+            {/* ADMIN — protégé + rôle admin seulement */}
+            <Route
+              path="/admin"
+              element={
+                // <ProtectedRoute>
+                  // <RoleBasedRedirect allowedRoles={['admin']}>
+                    <Admin />
+                  // </RoleBasedRedirect>
+                // </ProtectedRoute>
+              }
+            />
+
+            {/* PLATEFORME */}
             <Route 
               path="/plateforme" 
               element={
@@ -62,10 +73,9 @@ const App = () => {
               <Route path="cours" element={<Cours />} />
             </Route>
 
-            {/* NOT FOUND */}
+            {/* 404 */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </UserProvider>
       </AuthProvider>
     </BrowserRouter>
   );

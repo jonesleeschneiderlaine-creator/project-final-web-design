@@ -1,6 +1,6 @@
 # WEB DESIGN 2
 
-##EDUHAITI
+## EDUHAITI
 
 Ce projet de groupe a été réalisé par
 

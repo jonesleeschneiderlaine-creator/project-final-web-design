@@ -1,293 +1,194 @@
 // src/components/plateforme/CreateAccount/CreateAccount.jsx
+// ─── Inscription — UI designer + logique existante ───────────────────────────
+
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  FiUser, 
-  FiMail, 
-  FiPhone, 
-  FiLock, 
-  FiEye, 
-  FiEyeOff, 
-  FiUserPlus,
-} from 'react-icons/fi';
-
-import {FcGoogle} from 'react-icons/fc'
-
-import {FaFacebook} from 'react-icons/fa';
-
+import { ErrorAlert } from '../../shared/ErrorAlert/ErrorAlert';
+import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiUserPlus, FiCheck, FiDollarSign } from 'react-icons/fi';
 import './createAccount.css';
 
 const CreateAccount = ({ onSuccess, onSwitchToSignIn }) => {
   const [formData, setFormData] = useState({
-    full_name: '',
+    nom: '',
+    prenom: '',
     email: '',
-    phone: '',
     password: '',
     confirmPassword: '',
-    role: 'etudiant'
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
+  // ── Validation ──────────────────────────────────────────────────
   const validateForm = () => {
-    const newErrors = {};
-    
-    if (!formData.full_name.trim()) {
-      newErrors.full_name = 'Le nom complet est requis';
-    } else if (formData.full_name.length < 2) {
-      newErrors.full_name = 'Nom trop court';
-    }
-    
-    if (!formData.email) {
-      newErrors.email = 'L\'email est requis';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email invalide';
-    }
-    
-    if (!formData.password) {
-      newErrors.password = 'Le mot de passe est requis';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Au moins 6 caractères';
-    }
-    
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Les mots de passe ne correspondent pas';
-    }
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    const e = {};
+    if (!formData.nom.trim()) e.nom = 'Le nom est requis';
+    if (!formData.prenom.trim()) e.prenom = 'Le prénom est requis';
+    if (!formData.email) e.email = "L'email est requis";
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) e.email = 'Email invalide';
+    if (!formData.password) e.password = 'Mot de passe requis';
+    else if (formData.password.length < 6) e.password = '6 caractères minimum';
+    if (formData.password !== formData.confirmPassword) e.confirmPassword = 'Ne correspondent pas';
+    setErrors(e);
+    return Object.keys(e).length === 0;
   };
 
+  // ── Handlers ────────────────────────────────────────────────────
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
+    setFormData((p) => ({ ...p, [name]: value }));
+    if (errors[name]) setErrors((p) => ({ ...p, [name]: '' }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
-    
     setLoading(true);
+    setSubmitError(null);
     try {
-      const { confirmPassword, ...userData } = formData;
+      const userData = { full_name: `${formData.prenom} ${formData.nom}`, phone: '', role: 'etudiant' };
       await onSuccess(formData.email, formData.password, userData);
     } catch (error) {
-      setErrors({ submit: error.message });
+      setSubmitError(error);
     } finally {
       setLoading(false);
     }
   };
 
+  // ── Render ──────────────────────────────────────────────────────
   return (
     <div className="create-account">
+      {/* ── Header ──────────────────────────────────────────────── */}
       <div className="create-account__header">
-        <div className="create-account__icon">🎓</div>
-        <h2 className="create-account__title">Créer un compte</h2>
-        <p className="create-account__subtitle">Rejoignez la communauté EduHaïti</p>
+        <h2 className="create-account__title">Inscription</h2>
       </div>
 
-      <form className="create-account__form" onSubmit={handleSubmit}>
-        {errors.submit && (
-          <div className="create-account__error-global">
-            {errors.submit}
+      <div className="create-account__body">
+        <p className="create-account__welcome">Créer un compte</p>
+        <p className="create-account__sub">Rejoignez la communauté éducative haïtienne</p>
+
+        {/* ── Erreur globale ────────────────────────────────────── */}
+        <ErrorAlert
+          key={submitError?.message || submitError}
+          error={submitError}
+          onDismiss={() => setSubmitError(null)}
+        />
+
+        <form className="create-account__form" onSubmit={handleSubmit}>
+          {/* ── Nom + Prénom ────────────────────────────────────── */}
+          <div className="create-account__row">
+            <div className="create-account__group">
+              <label htmlFor="nom">Nom</label>
+              <div className="create-account__input-wrap">
+                <FiUser className="create-account__input-icon" size={18} />
+                <input
+                  id="nom" name="nom" type="text" placeholder="Votre nom"
+                  className={`create-account__input ${errors.nom ? 'create-account__input--err' : ''}`}
+                  value={formData.nom} onChange={handleChange} disabled={loading}
+                />
+              </div>
+              {errors.nom && <span className="create-account__field-err">{errors.nom}</span>}
+            </div>
+            <div className="create-account__group">
+              <label htmlFor="prenom">Prénom</label>
+              <div className="create-account__input-wrap">
+                <FiUser className="create-account__input-icon" size={18} />
+                <input
+                  id="prenom" name="prenom" type="text" placeholder="Votre prénom"
+                  className={`create-account__input ${errors.prenom ? 'create-account__input--err' : ''}`}
+                  value={formData.prenom} onChange={handleChange} disabled={loading}
+                />
+              </div>
+              {errors.prenom && <span className="create-account__field-err">{errors.prenom}</span>}
+            </div>
           </div>
-        )}
 
-        <div className="create-account__form-group">
-          <label htmlFor="full_name" className="create-account__label">
-            Nom complet *
-          </label>
-          <div className="create-account__input-wrapper">
-            <FiUser className="create-account__input-icon" size={18} />
-            <input
-              type="text"
-              id="full_name"
-              name="full_name"
-              className={`create-account__input ${errors.full_name ? 'create-account__input--error' : ''}`}
-              value={formData.full_name}
-              onChange={handleChange}
-              placeholder="Jean Dupont"
-              disabled={loading}
-            />
+          {/* ── Email ───────────────────────────────────────────── */}
+          <div className="create-account__group">
+            <label htmlFor="email">Adresse e-mail</label>
+            <div className="create-account__input-wrap">
+              <FiMail className="create-account__input-icon" size={18} />
+              <input
+                id="email" name="email" type="email" placeholder="exemple@eduhaiti.com"
+                className={`create-account__input ${errors.email ? 'create-account__input--err' : ''}`}
+                value={formData.email} onChange={handleChange} disabled={loading}
+              />
+            </div>
+            {errors.email && <span className="create-account__field-err">{errors.email}</span>}
           </div>
-          {errors.full_name && (
-            <span className="create-account__error">{errors.full_name}</span>
-          )}
-        </div>
 
-        <div className="create-account__form-group">
-          <label htmlFor="email" className="create-account__label">
-            Email *
-          </label>
-          <div className="create-account__input-wrapper">
-            <FiMail className="create-account__input-icon" size={18} />
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className={`create-account__input ${errors.email ? 'create-account__input--error' : ''}`}
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="exemple@eduhaïti.ht"
-              disabled={loading}
-            />
+          {/* ── Mot de passe ────────────────────────────────────── */}
+          <div className="create-account__group">
+            <label htmlFor="password">Mot de passe</label>
+            <div className="create-account__input-wrap">
+              <FiLock className="create-account__input-icon" size={18} />
+              <input
+                id="password" name="password" type={showPassword ? 'text' : 'password'}
+                placeholder="••••••••"
+                className={`create-account__input ${errors.password ? 'create-account__input--err' : ''}`}
+                value={formData.password} onChange={handleChange} disabled={loading}
+              />
+              <button type="button" className="create-account__toggle" onClick={() => setShowPassword(!showPassword)} tabIndex={-1}>
+                {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
+              </button>
+            </div>
+            {errors.password && <span className="create-account__field-err">{errors.password}</span>}
           </div>
-          {errors.email && (
-            <span className="create-account__error">{errors.email}</span>
-          )}
-        </div>
 
-        <div className="create-account__form-group">
-          <label htmlFor="phone" className="create-account__label">
-            Téléphone (optionnel)
-          </label>
-          <div className="create-account__input-wrapper">
-            <FiPhone className="create-account__input-icon" size={18} />
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              className="create-account__input"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="+509 1234 5678"
-              disabled={loading}
-            />
+          {/* ── Confirmer ───────────────────────────────────────── */}
+          <div className="create-account__group">
+            <label htmlFor="confirmPassword">Confirmer mot de passe</label>
+            <div className="create-account__input-wrap">
+              <FiLock className="create-account__input-icon" size={18} />
+              <input
+                id="confirmPassword" name="confirmPassword" type={showConfirm ? 'text' : 'password'}
+                placeholder="••••••••"
+                className={`create-account__input ${errors.confirmPassword ? 'create-account__input--err' : ''}`}
+                value={formData.confirmPassword} onChange={handleChange} disabled={loading}
+              />
+              <button type="button" className="create-account__toggle" onClick={() => setShowConfirm(!showConfirm)} tabIndex={-1}>
+                {showConfirm ? <FiEyeOff size={18} /> : <FiEye size={18} />}
+              </button>
+            </div>
+            {errors.confirmPassword && <span className="create-account__field-err">{errors.confirmPassword}</span>}
           </div>
-        </div>
 
-        <div className="create-account__form-group">
-          <label htmlFor="role" className="create-account__label">
-            Je suis *
-          </label>
-          <select
-            id="role"
-            name="role"
-            className="create-account__select"
-            value={formData.role}
-            onChange={handleChange}
-            disabled={loading}
-          >
-            <option value="etudiant">👨‍🎓 Étudiant</option>
-            <option value="enseignant">👨‍🏫 Enseignant</option>
-          </select>
-        </div>
+          {/* ── Submit ──────────────────────────────────────────── */}
+          <button type="submit" className="create-account__submit" disabled={loading}>
+            {loading ? (
+              <>
+                <span className="create-account__spinner" />
+                Inscription en cours...
+              </>
+            ) : (
+              <>
+                <FiUserPlus size={18} />
+                Créer un compte
+              </>
+            )}
+          </button>
+        </form>
+      </div>
 
-        <div className="create-account__form-group">
-          <label htmlFor="password" className="create-account__label">
-            Mot de passe *
-          </label>
-          <div className="create-account__password-wrapper">
-            <FiLock className="create-account__password-icon" size={18} />
-            <input
-              type={showPassword ? 'text' : 'password'}
-              id="password"
-              name="password"
-              className={`create-account__input ${errors.password ? 'create-account__input--error' : ''}`}
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="••••••••"
-              disabled={loading}
-            />
-            <button
-              type="button"
-              className="create-account__toggle-password"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
-            </button>
-          </div>
-          {errors.password && (
-            <span className="create-account__error">{errors.password}</span>
-          )}
-        </div>
-
-        <div className="create-account__form-group">
-          <label htmlFor="confirmPassword" className="create-account__label">
-            Confirmer le mot de passe *
-          </label>
-          <div className="create-account__password-wrapper">
-            <FiLock className="create-account__password-icon" size={18} />
-            <input
-              type={showConfirmPassword ? 'text' : 'password'}
-              id="confirmPassword"
-              name="confirmPassword"
-              className={`create-account__input ${errors.confirmPassword ? 'create-account__input--error' : ''}`}
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              placeholder="••••••••"
-              disabled={loading}
-            />
-            <button
-              type="button"
-              className="create-account__toggle-password"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            >
-              {showConfirmPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
-            </button>
-          </div>
-          {errors.confirmPassword && (
-            <span className="create-account__error">{errors.confirmPassword}</span>
-          )}
-        </div>
-
-        <div className="create-account__terms">
-          <label className="create-account__checkbox">
-            <input type="checkbox" required /> 
-            J'accepte les{' '}
-            <Link to="/politique-confidentialite">conditions d'utilisation</Link> 
-            {' '}et la{' '}
-            <Link to="/politique-confidentialite">politique de confidentialité</Link>
-          </label>
-        </div>
-
-        <button 
-          type="submit" 
-          className="create-account__submit"
-          disabled={loading}
-        >
-          {loading ? (
-            <>
-              <span className="create-account__spinner"></span>
-              Création en cours...
-            </>
-          ) : (
-            <>
-              <FiUserPlus size={18} />
-              Créer mon compte
-            </>
-          )}
+      {/* ── Carte avantages ──────────────────────────────────────── */}
+      <div className="create-account__benefits">
+        <h3><FiDollarSign size={20} /> Éviter les frais de base</h3>
+        <ul>
+          <li><FiCheck size={14} /> Éviter le téléchargement des applications et d'autres ressources</li>
+          <li><FiCheck size={14} /> Éviter les charges supplémentaires pour l'utilisation des services</li>
+        </ul>
+        <button type="button" className="create-account__benefits-btn">
+          Éviter les frais de base
         </button>
+      </div>
 
-        <div className="create-account__divider">
-          <span>Ou</span>
-        </div>
-
-        <div className="create-account__social">
-          <button type="button" className="create-account__social-btn create-account__social-btn--google">
-            <FcGoogle size={18} />
-            Google
-          </button>
-          <button type="button" className="create-account__social-btn create-account__social-btn--facebook">
-            <FaFacebook size={18} />
-            Facebook
-          </button>
-        </div>
-      </form>
-
+      {/* ── Footer ──────────────────────────────────────────────── */}
       <div className="create-account__footer">
         <p>
           Déjà un compte ?{' '}
-          <button 
-            type="button" 
-            className="create-account__switch"
-            onClick={onSwitchToSignIn}
-          >
+          <button type="button" className="create-account__link" onClick={onSwitchToSignIn}>
             Se connecter
           </button>
         </p>

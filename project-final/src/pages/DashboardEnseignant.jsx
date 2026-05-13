@@ -80,10 +80,10 @@ const DashboardEnseignant = () => {
   const updateTeacherProfile = async () => {
     try {
       await updateProfile(auth.currentUser, { displayName: teacherName });
-      // alert('✅ Profil mis à jour avec succès !');
+      alert('✅ Profil mis à jour avec succès !');
     } catch (error) {
       console.error('Erreur mise à jour:', error);
-      // alert('❌ Erreur lors de la mise à jour');
+      alert('❌ Erreur lors de la mise à jour');
     }
   };
 
@@ -175,7 +175,7 @@ const DashboardEnseignant = () => {
     if (chapters.length > 1) {
       setChapters(chapters.filter(ch => ch.id !== chapterId));
     } else {
-      // alert('Vous devez avoir au moins un chapitre');
+      alert('Vous devez avoir au moins un chapitre');
     }
   };
 
@@ -209,13 +209,13 @@ const DashboardEnseignant = () => {
           : ch
       ));
     } else {
-      // alert('Chaque chapitre doit avoir au moins une leçon');
+      alert('Chaque chapitre doit avoir au moins une leçon');
     }
   };
 
   const handleSubmitCourse = (e) => {
     e.preventDefault();
-    // alert('✅ Votre cours a été créé avec succès !');
+    alert('✅ Votre cours a été créé avec succès !');
     setCourseTitle('');
     setCourseSubtitle('');
     setCourseDescription('');
@@ -713,7 +713,7 @@ const DashboardEnseignant = () => {
               <div className="setting-item">
                 <div className="setting-info">
                   <span>📧 Notifications email</span>
-                  <p className="setting-desc">Recevoir des // alertes par email</p>
+                  <p className="setting-desc">Recevoir des alertes par email</p>
                 </div>
                 <label className="toggle-switch">
                   <input type="checkbox" checked={notificationsEnabled} onChange={(e) => setNotificationsEnabled(e.target.checked)} />
@@ -735,7 +735,7 @@ const DashboardEnseignant = () => {
               <div className="setting-item">
                 <div className="setting-info">
                   <span>🔔 Notifications push</span>
-                  <p className="setting-desc">// alertes en temps réel</p>
+                  <p className="setting-desc">Alertes en temps réel</p>
                 </div>
                 <label className="toggle-switch">
                   <input type="checkbox" checked={pushEnabled} onChange={(e) => setPushEnabled(e.target.checked)} />
@@ -750,7 +750,7 @@ const DashboardEnseignant = () => {
                 <span className="card-badge danger-badge">Action irréversible</span>
               </div>
               <p>Supprimer définitivement votre compte ainsi que toutes vos données. Cette action est irréversible.</p>
-              <button className="btn danger-btn" onClick={() => { if (window.confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')) // alert('Compte supprimé'); }}>🗑️ Supprimer mon compte</button>
+              <button className="btn danger-btn" onClick={() => { if (window.confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')) alert('Compte supprimé'); }}>🗑️ Supprimer mon compte</button>
             </div>
           </>
         )}

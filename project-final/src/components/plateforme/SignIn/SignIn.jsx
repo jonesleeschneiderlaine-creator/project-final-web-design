@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ErrorAlert } from '../../shared/ErrorAlert/ErrorAlert';
+import { Error// alert } from '../../shared/Error// alert/Error// alert';
 import { FiMail, FiLock, FiEye, FiEyeOff, FiLogIn } from 'react-icons/fi';
 import './signIn.css';
 
@@ -58,7 +58,7 @@ const SignIn = ({ onSuccess, onSwitchToSignUp }) => {
         <p className="signin__sub">Connectez-vous à votre compte</p>
 
         {/* ── Erreur globale ────────────────────────────────────── */}
-        <ErrorAlert
+        <Error// alert
           key={submitError?.message || submitError}
           error={submitError}
           onDismiss={() => setSubmitError(null)}

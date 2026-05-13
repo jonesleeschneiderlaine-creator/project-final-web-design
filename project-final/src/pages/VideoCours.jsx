@@ -89,11 +89,11 @@ const VideoCours = () => {
   };
 
   const downloadFile = (fileName) => {
-    alert(`📥 Téléchargement de "${fileName}" démarré...`);
+    // alert(`📥 Téléchargement de "${fileName}" démarré...`);
   };
 
   const previewFile = (fileName) => {
-    alert(`👁️ Aperçu de "${fileName}" (fonctionnalité à venir)`);
+    // alert(`👁️ Aperçu de "${fileName}" (fonctionnalité à venir)`);
   };
 
   const toggleAllChapters = () => {

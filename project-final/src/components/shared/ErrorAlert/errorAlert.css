@@ -1,7 +1,7 @@
-/* src/components/shared/ErrorAlert/errorAlert.css
-   ─── Alerte erreur ───────────────────────────────────────────── */
+/* src/components/shared/Error// alert/error// alert.css
+   ─── // alerte erreur ───────────────────────────────────────────── */
 
-.error-alert {
+.error-// alert {
   display: flex;
   align-items: flex-start;
   gap: 12px;
@@ -13,10 +13,10 @@
   color: #991b1b;
   font-size: 14px;
   line-height: 1.5;
-  animation: error-alert-in 0.25s ease-out;
+  animation: error-// alert-in 0.25s ease-out;
 }
 
-@keyframes error-alert-in {
+@keyframes error-// alert-in {
   from {
     opacity: 0;
     transform: translateY(-6px);
@@ -27,18 +27,18 @@
   }
 }
 
-.error-alert__icon {
+.error-// alert__icon {
   flex-shrink: 0;
   margin-top: 1px;
   color: #ef4444;
 }
 
-.error-alert__message {
+.error-// alert__message {
   flex: 1;
   margin: 0;
 }
 
-.error-alert__close {
+.error-// alert__close {
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -52,6 +52,6 @@
   transition: background 0.15s;
 }
 
-.error-alert__close:hover {
+.error-// alert__close:hover {
   background: #fecaca;
 }

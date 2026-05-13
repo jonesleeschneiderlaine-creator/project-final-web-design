@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ErrorAlert } from '../../shared/ErrorAlert/ErrorAlert';
+import { Error// alert } from '../../shared/Error// alert/Error// alert';
 import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiUserPlus, FiCheck, FiDollarSign } from 'react-icons/fi';
 import './createAccount.css';
 
@@ -70,7 +70,7 @@ const CreateAccount = ({ onSuccess, onSwitchToSignIn }) => {
         <p className="create-account__sub">Rejoignez la communauté éducative haïtienne</p>
 
         {/* ── Erreur globale ────────────────────────────────────── */}
-        <ErrorAlert
+        <Error// alert
           key={submitError?.message || submitError}
           error={submitError}
           onDismiss={() => setSubmitError(null)}

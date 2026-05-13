@@ -1,12 +1,12 @@
 // src/components/plateforme/Etudiant/GradeTable/GradeTable.jsx
 // ─── Tableau notes ──────────────────────────────────────────────────────────
 
-import { FiCheckCircle, FiAlertTriangle, FiXCircle } from 'react-icons/fi';
+import { FiCheckCircle, Fi// alertTriangle, FiXCircle } from 'react-icons/fi';
 import './gradeTable.css';
 
 const STATUS_ICON = {
   success: FiCheckCircle,
-  warning: FiAlertTriangle,
+  warning: Fi// alertTriangle,
   fail: FiXCircle,
 };
 

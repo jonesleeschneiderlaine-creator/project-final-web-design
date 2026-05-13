@@ -1,7 +1,7 @@
 // src/components/Admin/ReportCard/ReportCard.jsx
 // ─── Carte signalement ────────────────────────────────────────────────────────
 
-import { FiUser, FiCalendar, FiAlertCircle, FiCheck, FiLock } from 'react-icons/fi';
+import { FiUser, FiCalendar, Fi// alertCircle, FiCheck, FiLock } from 'react-icons/fi';
 import './reportCard.css';
 
 const ReportCard = ({ report, onIgnore, onBlock }) => (
@@ -15,7 +15,7 @@ const ReportCard = ({ report, onIgnore, onBlock }) => (
       </span>
     </div>
     <p className="report-card__reason">
-      <FiAlertCircle size={14} /> {report.reason}
+      <Fi// alertCircle size={14} /> {report.reason}
     </p>
     <div className="report-card__actions">
       <button onClick={onIgnore}>

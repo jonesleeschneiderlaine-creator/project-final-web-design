@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../config/firebase';
+import { onAuthStateChanged, signOut, updateProfile } from 'firebase/auth';
 import './DashboardEnseignant.css';
 
 const DashboardEnseignant = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('dashboard');
   const [activeCourseFilter, setActiveCourseFilter] = useState('all');
   const [studentFilter, setStudentFilter] = useState('all');
   const [studentSearch, setStudentSearch] = useState('');
-  const [teacherName, setTeacherName] = useState('Marie Pierre');
-  const [teacherEmail, setTeacherEmail] = useState('marie.pierre@eduhaiti.com');
-  const [teacherBio, setTeacherBio] = useState('Professeure de mathématiques passionnée par l\'éducation en Haïti. Plus de 8 ans d\'expérience dans l\'enseignement secondaire et supérieur.');
+  
+  // 🔥 ÉTATS POUR L'UTILISATEUR CONNECTÉ
+  const [currentUser, setCurrentUser] = useState(null);
+  const [teacherName, setTeacherName] = useState('Enseignant');
+  const [teacherEmail, setTeacherEmail] = useState('');
+  const [teacherBio, setTeacherBio] = useState('Professeur passionné par l\'éducation en Haïti.');
+  const [loading, setLoading] = useState(true);
+  
+  // Autres états
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [darkModeEnabled, setDarkModeEnabled] = useState(false);
   const [pushEnabled, setPushEnabled] = useState(true);
@@ -35,6 +44,58 @@ const DashboardEnseignant = () => {
       { title: "Les concepts clés", type: "video" }
     ]}
   ]);
+
+  // 🔥 RÉCUPÉRER L'UTILISATEUR CONNECTÉ DEPUIS FIREBASE
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser(user);
+        setTeacherEmail(user.email);
+        if (user.displayName) {
+          setTeacherName(user.displayName);
+        } else {
+          const emailName = user.email.split('@')[0];
+          setTeacherName(emailName.replace(/[.-]/g, ' '));
+        }
+      } else {
+        // Pas d'utilisateur connecté → rediriger vers connexion
+        navigate('/connexion');
+      }
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, [navigate]);
+
+  // 🔥 FONCTION DE DÉCONNEXION
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/connexion');
+    } catch (error) {
+      console.error('Erreur de déconnexion:', error);
+    }
+  };
+
+  // 🔥 FONCTION POUR METTRE À JOUR LE PROFIL
+  const updateTeacherProfile = async () => {
+    try {
+      await updateProfile(auth.currentUser, { displayName: teacherName });
+      // alert('✅ Profil mis à jour avec succès !');
+    } catch (error) {
+      console.error('Erreur mise à jour:', error);
+      // alert('❌ Erreur lors de la mise à jour');
+    }
+  };
+
+  // Si chargement
+  if (loading) {
+    return (
+      <div className="loading-screen">
+        <div className="spinner"></div>
+        <p>Chargement de votre tableau de bord...</p>
+      </div>
+    );
+  }
 
   // Données des étudiants
   const studentsData = [
@@ -114,7 +175,7 @@ const DashboardEnseignant = () => {
     if (chapters.length > 1) {
       setChapters(chapters.filter(ch => ch.id !== chapterId));
     } else {
-      alert('Vous devez avoir au moins un chapitre');
+      // alert('Vous devez avoir au moins un chapitre');
     }
   };
 
@@ -148,19 +209,27 @@ const DashboardEnseignant = () => {
           : ch
       ));
     } else {
-      alert('Chaque chapitre doit avoir au moins une leçon');
+      // alert('Chaque chapitre doit avoir au moins une leçon');
     }
   };
 
   const handleSubmitCourse = (e) => {
     e.preventDefault();
-    alert('✅ Votre cours a été créé avec succès !');
-    // Réinitialiser le formulaire
+    // alert('✅ Votre cours a été créé avec succès !');
     setCourseTitle('');
     setCourseSubtitle('');
     setCourseDescription('');
     setCoverImage(null);
     setImagePreview(null);
+  };
+
+  // Extraire les initiales pour l'avatar
+  const getUserInitials = () => {
+    const names = teacherName.split(' ');
+    if (names.length === 1) {
+      return names[0].charAt(0).toUpperCase();
+    }
+    return (names[0].charAt(0) + names[names.length - 1].charAt(0)).toUpperCase();
   };
 
   return (
@@ -214,9 +283,7 @@ const DashboardEnseignant = () => {
         </nav>
         
         <div className="sidebar-footer">
-          <Link to="/">
-            <button className="logout-btn">🚪 Déconnexion</button>
-          </Link>
+          <button className="logout-btn" onClick={handleLogout}>🚪 Déconnexion</button>
         </div>
       </aside>
 
@@ -235,7 +302,10 @@ const DashboardEnseignant = () => {
             <span className="date">
               📅 {new Date().toLocaleDateString('fr-FR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
             </span>
-            <div className="avatar">👩‍🏫</div>
+            <div className="user-avatar-info">
+              <div className="avatar-initials">{getUserInitials()}</div>
+              <span className="user-name-header">{teacherName}</span>
+            </div>
           </div>
         </header>
 
@@ -333,16 +403,16 @@ const DashboardEnseignant = () => {
           </>
         )}
 
-        {/* PROFILE TAB - (conserve ton code existant) */}
+        {/* PROFILE TAB - AVEC FIREBASE */}
         {activeTab === 'profile' && (
           <>
             <div className="profile-grid">
               <div className="profile-card photo-card">
-                <div className="avatar-circle">👩‍🏫</div>
+                <div className="avatar-circle">{getUserInitials()}</div>
                 <button className="change-photo-btn">📷 Changer photo</button>
                 <div className="profile-status">
                   <span className="status-badge active">✅ En ligne</span>
-                  <span className="member-since">Membre depuis Janvier 2025</span>
+                  <span className="member-since">Membre depuis {currentUser?.metadata?.creationTime ? new Date(currentUser.metadata.creationTime).toLocaleDateString('fr-FR') : 'Janvier 2025'}</span>
                 </div>
               </div>
 
@@ -356,13 +426,14 @@ const DashboardEnseignant = () => {
                     </div>
                     <div className="form-group">
                       <label>Titre / Spécialité</label>
-                      <input type="text" value="Professeur de Mathématiques" />
+                      <input type="text" value="Professeur" />
                     </div>
                   </div>
                   <div className="form-row">
                     <div className="form-group">
                       <label>Email professionnel</label>
-                      <input type="email" value={teacherEmail} onChange={(e) => setTeacherEmail(e.target.value)} />
+                      <input type="email" value={teacherEmail} disabled style={{ backgroundColor: '#f0f0f0' }} />
+                      <small style={{ color: '#666' }}>L'email ne peut pas être modifié</small>
                     </div>
                     <div className="form-group">
                       <label>Téléphone</label>
@@ -386,18 +457,17 @@ const DashboardEnseignant = () => {
 
             <div className="two-columns">
               <div className="section"><h3>💼 Expérience professionnelle</h3>
-                <div className="timeline-item"><div className="timeline-header"><span className="timeline-title">Professeur de Mathématiques</span><span className="timeline-date">2022 - Aujourd'hui</span></div><p className="timeline-place">Lycée National, Port-au-Prince</p></div>
+                <div className="timeline-item"><div className="timeline-header"><span className="timeline-title">Professeur</span><span className="timeline-date">2022 - Aujourd'hui</span></div><p className="timeline-place">Lycée National, Port-au-Prince</p></div>
                 <button className="btn-add-item">+ Ajouter une expérience</button>
               </div>
               <div className="section"><h3>🎓 Formation & Diplômes</h3>
-                <div className="timeline-item"><div className="timeline-header"><span className="timeline-title">Master en Mathématiques Appliquées</span><span className="timeline-date">2018 - 2020</span></div><p className="timeline-place">Université d'État d'Haïti</p></div>
+                <div className="timeline-item"><div className="timeline-header"><span className="timeline-title">Master en Éducation</span><span className="timeline-date">2018 - 2020</span></div><p className="timeline-place">Université d'État d'Haïti</p></div>
                 <button className="btn-add-item">+ Ajouter un diplôme</button>
               </div>
             </div>
 
             <div className="section"><h3>🔧 Compétences</h3>
               <div className="skills-container">
-                <span className="skill-tag">Mathématiques</span>
                 <span className="skill-tag">Pédagogie</span>
                 <span className="skill-tag">Création de contenu</span>
                 <span className="skill-tag-add">+ Ajouter</span>
@@ -406,12 +476,12 @@ const DashboardEnseignant = () => {
 
             <div className="form-actions">
               <button className="btn-cancel">Annuler</button>
-              <button className="btn-submit">💾 Sauvegarder les modifications</button>
+              <button className="btn-submit" onClick={updateTeacherProfile}>💾 Sauvegarder les modifications</button>
             </div>
           </>
         )}
 
-        {/* STUDENTS TAB - (conserve ton code existant) */}
+        {/* STUDENTS TAB - (inchangé) */}
         {activeTab === 'students' && (
           <>
             <section className="filters-section">
@@ -450,28 +520,23 @@ const DashboardEnseignant = () => {
           </>
         )}
 
-        {/* CREATE COURSE TAB - NOUVEAU */}
+        {/* CREATE COURSE TAB - (inchangé) */}
         {activeTab === 'createCourse' && (
           <form className="course-form" onSubmit={handleSubmitCourse}>
-            {/* SECTION 1 : INFORMATIONS GÉNÉRALES */}
             <section className="form-section">
               <h2>📋 Informations générales</h2>
-              
               <div className="form-group">
                 <label>Titre du cours <span className="required">*</span></label>
                 <input type="text" placeholder="Ex: Mathématiques Avancées - Niveau Secondaire" value={courseTitle} onChange={(e) => setCourseTitle(e.target.value)} required />
               </div>
-
               <div className="form-group">
                 <label>Sous-titre / Accroche</label>
                 <input type="text" placeholder="Une phrase accrocheuse pour présenter votre cours" value={courseSubtitle} onChange={(e) => setCourseSubtitle(e.target.value)} />
               </div>
-
               <div className="form-group">
                 <label>Description du cours <span className="required">*</span></label>
-                <textarea rows="4" placeholder="Décrivez le contenu, les objectifs et ce que les étudiants vont apprendre..." value={courseDescription} onChange={(e) => setCourseDescription(e.target.value)} required></textarea>
+                <textarea rows="4" placeholder="Décrivez le contenu, les objectifs..." value={courseDescription} onChange={(e) => setCourseDescription(e.target.value)} required></textarea>
               </div>
-
               <div className="form-row">
                 <div className="form-group">
                   <label>Catégorie principale</label>
@@ -482,7 +547,6 @@ const DashboardEnseignant = () => {
                     <option>Histoire</option>
                     <option>Langues étrangères</option>
                     <option>Informatique</option>
-                    <option>Arts</option>
                   </select>
                 </div>
                 <div className="form-group">
@@ -491,7 +555,6 @@ const DashboardEnseignant = () => {
                     <option>Débutant</option>
                     <option>Intermédiaire</option>
                     <option>Avancé</option>
-                    <option>Tous niveaux</option>
                   </select>
                 </div>
                 <div className="form-group">
@@ -501,28 +564,13 @@ const DashboardEnseignant = () => {
                     <option>2 - 5 heures</option>
                     <option>5 - 10 heures</option>
                     <option>10 - 20 heures</option>
-                    <option>Plus de 20 heures</option>
                   </select>
-                </div>
-              </div>
-
-              <div className="form-group">
-                <label>Catégories / Tags</label>
-                <div className="categories-grid">
-                  <label className="checkbox-label"><input type="checkbox" value="mathematiques" /> Mathématiques</label>
-                  <label className="checkbox-label"><input type="checkbox" value="algebre" /> Algèbre</label>
-                  <label className="checkbox-label"><input type="checkbox" value="geometrie" /> Géométrie</label>
-                  <label className="checkbox-label"><input type="checkbox" value="video" /> Vidéo</label>
-                  <label className="checkbox-label"><input type="checkbox" value="quiz" /> Quiz</label>
-                  <label className="checkbox-label"><input type="checkbox" value="certificat" /> Certificat</label>
                 </div>
               </div>
             </section>
 
-            {/* SECTION 2 : IMAGE & MÉDIAS */}
             <section className="form-section">
               <h2>🖼️ Image & médias</h2>
-              
               <div className="form-group">
                 <label>Image de couverture</label>
                 {!imagePreview ? (
@@ -540,18 +588,10 @@ const DashboardEnseignant = () => {
                 )}
                 <input type="file" id="coverImageInput" accept="image/*" style={{ display: 'none' }} onChange={handleImageUpload} />
               </div>
-
-              <div className="form-group">
-                <label>Vidéo d'introduction (optionnel)</label>
-                <input type="url" placeholder="Lien YouTube ou Vimeo" />
-              </div>
             </section>
 
-            {/* SECTION 3 : CONTENU DU COURS (CHAPITRES) */}
             <section className="form-section">
               <h2>📚 Contenu du cours</h2>
-              <p className="section-desc">Ajoutez des chapitres et des leçons à votre cours</p>
-              
               <div id="chaptersContainer">
                 {chapters.map((chapter, chIdx) => (
                   <div key={chapter.id} className="chapter-item">
@@ -582,14 +622,11 @@ const DashboardEnseignant = () => {
                   </div>
                 ))}
               </div>
-
               <button type="button" className="btn-add-chapter" onClick={addChapter}>+ Ajouter un chapitre</button>
             </section>
 
-            {/* SECTION 4 : PRIX & ACCESSIBILITÉ */}
             <section className="form-section">
               <h2>💰 Prix & Accessibilité</h2>
-              
               <div className="form-row">
                 <div className="form-group half">
                   <label>Type de cours</label>
@@ -603,18 +640,15 @@ const DashboardEnseignant = () => {
                   <input type="number" placeholder="0.00" value={coursePrice} onChange={(e) => setCoursePrice(Number(e.target.value))} disabled={courseType === 'Gratuit'} />
                 </div>
               </div>
-
               <div className="form-group">
                 <label>Accessibilité</label>
                 <div className="accessibility-options">
                   <label className="radio-label"><input type="radio" name="access" value="public" checked={courseAccess === 'public'} onChange={() => setCourseAccess('public')} /> Public (tout le monde peut voir)</label>
                   <label className="radio-label"><input type="radio" name="access" value="private" checked={courseAccess === 'private'} onChange={() => setCourseAccess('private')} /> Privé (sur invitation uniquement)</label>
-                  <label className="radio-label"><input type="radio" name="access" value="beta" checked={courseAccess === 'beta'} onChange={() => setCourseAccess('beta')} /> Bêta (accès limité)</label>
                 </div>
               </div>
             </section>
 
-            {/* BOUTONS D'ACTION */}
             <div className="form-actions">
               <button type="button" className="btn-cancel" onClick={() => setActiveTab('dashboard')}>Annuler</button>
               <button type="button" className="btn-draft">💾 Sauvegarder comme brouillon</button>
@@ -623,7 +657,7 @@ const DashboardEnseignant = () => {
           </form>
         )}
 
-        {/* STATISTICS TAB - (conserve ton code existant) */}
+        {/* STATISTICS TAB */}
         {activeTab === 'stats' && (
           <>
             <div className="stats-cards">
@@ -643,87 +677,83 @@ const DashboardEnseignant = () => {
           </>
         )}
 
-        {/* SETTINGS TAB - CORRIGÉ */}
-{activeTab === 'settings' && (
-  <>
-    {/* Carte Profil */}
-    <div className="card">
-      <div className="card-header">
-        <h3>👤 Profil</h3>
-        <span className="card-badge">Informations personnelles</span>
-      </div>
-      <div className="form-group">
-        <label>Nom complet</label>
-        <input type="text" value={teacherName} onChange={(e) => setTeacherName(e.target.value)} />
-      </div>
-      <div className="form-group">
-        <label>Email</label>
-        <input type="email" value={teacherEmail} onChange={(e) => setTeacherEmail(e.target.value)} />
-      </div>
-      <div className="form-group">
-        <label>Nouveau mot de passe</label>
-        <input type="password" placeholder="••••••••" />
-      </div>
-      <div className="form-group">
-        <label>Confirmer le mot de passe</label>
-        <input type="password" placeholder="••••••••" />
-      </div>
-      <button className="btn primary">💾 Sauvegarder</button>
-    </div>
+        {/* SETTINGS TAB */}
+        {activeTab === 'settings' && (
+          <>
+            <div className="card">
+              <div className="card-header">
+                <h3>👤 Profil</h3>
+                <span className="card-badge">Informations personnelles</span>
+              </div>
+              <div className="form-group">
+                <label>Nom complet</label>
+                <input type="text" value={teacherName} onChange={(e) => setTeacherName(e.target.value)} />
+              </div>
+              <div className="form-group">
+                <label>Email</label>
+                <input type="email" value={teacherEmail} disabled style={{ backgroundColor: '#f0f0f0' }} />
+              </div>
+              <div className="form-group">
+                <label>Nouveau mot de passe</label>
+                <input type="password" placeholder="••••••••" />
+              </div>
+              <div className="form-group">
+                <label>Confirmer le mot de passe</label>
+                <input type="password" placeholder="••••••••" />
+              </div>
+              <button className="btn primary" onClick={updateTeacherProfile}>💾 Sauvegarder</button>
+            </div>
 
-    {/* Carte Préférences - CORRIGÉE */}
-    <div className="card">
-      <div className="card-header">
-        <h3>🎨 Préférences</h3>
-        <span className="card-badge">Personnalisation</span>
-      </div>
-      
-      <div className="setting-item">
-        <div className="setting-info">
-          <span>📧 Notifications email</span>
-          <p className="setting-desc">Recevoir des alertes par email</p>
-        </div>
-        <label className="toggle-switch">
-          <input type="checkbox" checked={notificationsEnabled} onChange={(e) => setNotificationsEnabled(e.target.checked)} />
-          <span className="toggle-slider"></span>
-        </label>
-      </div>
+            <div className="card">
+              <div className="card-header">
+                <h3>🎨 Préférences</h3>
+                <span className="card-badge">Personnalisation</span>
+              </div>
+              
+              <div className="setting-item">
+                <div className="setting-info">
+                  <span>📧 Notifications email</span>
+                  <p className="setting-desc">Recevoir des // alertes par email</p>
+                </div>
+                <label className="toggle-switch">
+                  <input type="checkbox" checked={notificationsEnabled} onChange={(e) => setNotificationsEnabled(e.target.checked)} />
+                  <span className="toggle-slider"></span>
+                </label>
+              </div>
 
-      <div className="setting-item">
-        <div className="setting-info">
-          <span>🌙 Mode sombre</span>
-          <p className="setting-desc">Thème sombre pour l'interface</p>
-        </div>
-        <label className="toggle-switch">
-          <input type="checkbox" checked={darkModeEnabled} onChange={(e) => setDarkModeEnabled(e.target.checked)} />
-          <span className="toggle-slider"></span>
-        </label>
-      </div>
+              <div className="setting-item">
+                <div className="setting-info">
+                  <span>🌙 Mode sombre</span>
+                  <p className="setting-desc">Thème sombre pour l'interface</p>
+                </div>
+                <label className="toggle-switch">
+                  <input type="checkbox" checked={darkModeEnabled} onChange={(e) => setDarkModeEnabled(e.target.checked)} />
+                  <span className="toggle-slider"></span>
+                </label>
+              </div>
 
-      <div className="setting-item">
-        <div className="setting-info">
-          <span>🔔 Notifications push</span>
-          <p className="setting-desc">Alertes en temps réel</p>
-        </div>
-        <label className="toggle-switch">
-          <input type="checkbox" checked={pushEnabled} onChange={(e) => setPushEnabled(e.target.checked)} />
-          <span className="toggle-slider"></span>
-        </label>
-      </div>
-    </div>
+              <div className="setting-item">
+                <div className="setting-info">
+                  <span>🔔 Notifications push</span>
+                  <p className="setting-desc">// alertes en temps réel</p>
+                </div>
+                <label className="toggle-switch">
+                  <input type="checkbox" checked={pushEnabled} onChange={(e) => setPushEnabled(e.target.checked)} />
+                  <span className="toggle-slider"></span>
+                </label>
+              </div>
+            </div>
 
-    {/* Carte Zone dangereuse */}
-    <div className="card danger">
-      <div className="card-header">
-        <h3>⚠️ Zone dangereuse</h3>
-        <span className="card-badge danger-badge">Action irréversible</span>
-      </div>
-      <p>Supprimer définitivement votre compte ainsi que toutes vos données. Cette action est irréversible.</p>
-      <button className="btn danger-btn" onClick={() => { if (window.confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')) alert('Compte supprimé'); }}>🗑️ Supprimer mon compte</button>
-    </div>
-  </>
-)}
-
+            <div className="card danger">
+              <div className="card-header">
+                <h3>⚠️ Zone dangereuse</h3>
+                <span className="card-badge danger-badge">Action irréversible</span>
+              </div>
+              <p>Supprimer définitivement votre compte ainsi que toutes vos données. Cette action est irréversible.</p>
+              <button className="btn danger-btn" onClick={() => { if (window.confirm('Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est irréversible.')) // alert('Compte supprimé'); }}>🗑️ Supprimer mon compte</button>
+            </div>
+          </>
+        )}
       </main>
     </div>
   );

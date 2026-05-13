@@ -247,7 +247,7 @@ const DashboardEt = () => {
           <div className="dashboard-et__settings">
             <h1>Paramètres</h1>
             <SettingsSection title="Notifications">
-              <SettingRow label="Notifications par email" desc="Alertes pour nouveaux cours et quiz" checked={emailNotif} onChange={(e) => setEmailNotif(e.target.checked)} />
+              <SettingRow label="Notifications par email" desc="// alertes pour nouveaux cours et quiz" checked={emailNotif} onChange={(e) => setEmailNotif(e.target.checked)} />
               <SettingRow label="Rappels de quiz" desc="Rappel 24h avant chaque quiz" checked={quizReminders} onChange={(e) => setQuizReminders(e.target.checked)} />
               <SettingRow label="Newsletter pédagogique" desc="Conseils et ressources éducatives" checked={newsletter} onChange={(e) => setNewsletter(e.target.checked)} />
             </SettingsSection>

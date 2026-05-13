@@ -2,7 +2,7 @@
 // ─── Carte enseignant + vidéos ────────────────────────────────────────────────
 
 import { useState } from 'react';
-import { FiChevronDown, FiChevronUp, FiAlertTriangle, FiEyeOff, FiTrash2 } from 'react-icons/fi';
+import { FiChevronDown, FiChevronUp, Fi// alertTriangle, FiEyeOff, FiTrash2 } from 'react-icons/fi';
 import './teacherCard.css';
 
 const TeacherCard = ({ teacher, videos, onWarn, onWarnVideo, onHideVideo, onDeleteVideo }) => {
@@ -41,7 +41,7 @@ const TeacherCard = ({ teacher, videos, onWarn, onWarnVideo, onHideVideo, onDele
             className="teacher-card__warn-btn"
             onClick={(e) => { e.stopPropagation(); onWarn(teacher); }}
           >
-            <FiAlertTriangle size={14} />
+            <Fi// alertTriangle size={14} />
             <span>Avertir</span>
           </button>
           {expanded ? <FiChevronUp size={20} /> : <FiChevronDown size={20} />}
@@ -66,7 +66,7 @@ const TeacherCard = ({ teacher, videos, onWarn, onWarnVideo, onHideVideo, onDele
                   {v.hiddenUntil && <p className="teacher-card__video-until">Masquée jusqu'au {v.hiddenUntil}</p>}
                   <div className="teacher-card__video-actions">
                     <button onClick={() => onWarnVideo(v.id, v.title, teacher.id)}>
-                      <FiAlertTriangle size={13} /> Avertir
+                      <Fi// alertTriangle size={13} /> Avertir
                     </button>
                     <button onClick={() => onHideVideo(v, `${teacher.prenom} ${teacher.nom}`)}>
                       <FiEyeOff size={13} /> Masquer

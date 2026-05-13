@@ -1,0 +1,379 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.apropos-container {
+    background: #f5f7fb;
+    min-height: 100vh;
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    background: #0b1f3a;
+    color: white;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.navbar nav a {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.navbar nav a:hover,
+.navbar nav a.active {
+    color: #f39c12;
+}
+
+.auth {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.login {
+    background: #e74c3c;
+    color: white;
+}
+
+.login:hover {
+    background: #c0392b;
+    transform: scale(1.02);
+}
+
+.register {
+    background: #2ecc71;
+    color: white;
+}
+
+.register:hover {
+    background: #27ae60;
+    transform: scale(1.02);
+}
+
+/* ========== BANNER ========== */
+.banner {
+    background: linear-gradient(135deg, #0b1f3a, #0f4c81);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.banner h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.banner p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* ========== MISSION ========== */
+.mission {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    padding: 60px;
+    background: white;
+    flex-wrap: wrap;
+}
+
+.mission-text {
+    flex: 1;
+}
+
+.mission-text h2 {
+    font-size: 2rem;
+    color: #0b1f3a;
+    margin-bottom: 20px;
+}
+
+.mission-text p {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    font-size: 1rem;
+}
+
+.mission-img {
+    flex: 1;
+}
+
+.mission-img img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.mission-img img:hover {
+    transform: scale(1.02);
+}
+
+/* ========== VALEURS ========== */
+.values {
+    padding: 60px;
+    text-align: center;
+    background: #f5f7fb;
+}
+
+.values h2 {
+    font-size: 2rem;
+    color: #0b1f3a;
+    margin-bottom: 40px;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.value-card {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.value-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.value-card h3 {
+    color: #0b1f3a;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.value-card p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* ========== EQUIPE ========== */
+.team {
+    padding: 60px;
+    background: white;
+    text-align: center;
+}
+
+.team h2 {
+    font-size: 2rem;
+    color: #0b1f3a;
+    margin-bottom: 40px;
+}
+
+.team-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.team-card {
+    text-align: center;
+    width: 220px;
+    transition: transform 0.2s;
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+}
+
+.team-img, .team-img2, .team-img3 {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.team-img:hover, .team-img2:hover, .team-img3:hover {
+    transform: scale(1.05);
+}
+
+.team-img {
+    background-image: url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop');
+}
+.team-img2 {
+    background-image: url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=150&h=150&fit=crop');
+}
+.team-img3 {
+    background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop');
+}
+
+.team-card h3 {
+    color: #0b1f3a;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.team-card p {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* Ajoute cette classe avec les autres .team-img */
+.team-img4 {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.team-img4:hover {
+    transform: scale(1.05);
+}
+
+.team-img4 {
+    background-image: url('https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop');
+}
+
+
+/* ========== FOOTER ========== */
+.footer {
+    background: #0b1f3a;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 40px 60px;
+    margin-top: 0;
+}
+
+.footer-left h3 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.footer-left p {
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .navbar nav a {
+        margin: 0 10px;
+    }
+    
+    .banner h1 {
+        font-size: 1.8rem;
+    }
+    
+    .mission {
+        padding: 30px 20px;
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .mission-text h2 {
+        font-size: 1.6rem;
+    }
+    
+    .values {
+        padding: 40px 20px;
+    }
+    
+    .values h2 {
+        font-size: 1.6rem;
+    }
+    
+    .team {
+        padding: 40px 20px;
+    }
+    
+    .team h2 {
+        font-size: 1.6rem;
+    }
+    
+    .footer {
+        padding: 30px 25px;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .footer-links {
+        justify-content: center;
+    }
+    
+    .team-card {
+        width: 180px;
+    }
+    
+    .team-img, .team-img2, .team-img3 {
+        width: 120px;
+        height: 120px;
+    }
+}

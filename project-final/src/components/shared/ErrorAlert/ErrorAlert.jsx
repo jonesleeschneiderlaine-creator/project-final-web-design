@@ -1,5 +1,5 @@
-// src/components/shared/ErrorAlert/ErrorAlert.jsx
-// ─── Alerte erreur user-friendly ─────────────────────────────────────────────
+// src/components/shared/Error// alert/Error// alert.jsx
+// ─── // alerte erreur user-friendly ─────────────────────────────────────────────
 // Reçoit une erreur (string, Error, ou objet Supabase) et affiche
 // un message compréhensible via le mapping.
 //
@@ -10,11 +10,11 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import { useState } from 'react';
-import { FiAlertTriangle, FiX } from 'react-icons/fi';
+import { Fi// alertTriangle, FiX } from 'react-icons/fi';
 import { mapError } from './errorMapping';
-import './errorAlert.css';
+import './error// alert.css';
 
-export const ErrorAlert = ({ error, onDismiss, className = '' }) => {
+export const Error// alert = ({ error, onDismiss, className = '' }) => {
   const [dismissed, setDismissed] = useState(false);
 
   if (!error || dismissed) return null;
@@ -27,12 +27,12 @@ export const ErrorAlert = ({ error, onDismiss, className = '' }) => {
   };
 
   return (
-    <div className={`error-alert ${className}`} role="alert">
-      <FiAlertTriangle className="error-alert__icon" size={20} />
-      <p className="error-alert__message">{message}</p>
+    <div className={`error-// alert ${className}`} role="// alert">
+      <Fi// alertTriangle className="error-// alert__icon" size={20} />
+      <p className="error-// alert__message">{message}</p>
       {onDismiss && (
         <button
-          className="error-alert__close"
+          className="error-// alert__close"
           onClick={handleDismiss}
           aria-label="Fermer"
         >

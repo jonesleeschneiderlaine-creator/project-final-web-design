@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { auth } from '../config/firebase';
+import { onAuthStateChanged, signOut, updateProfile } from 'firebase/auth';
 import './DashboardEtudiant.css';
 
 const DashboardEtudiant = () => {
@@ -12,11 +14,86 @@ const DashboardEtudiant = () => {
   const [newsletter, setNewsletter] = useState(false);
   const [shareProgress, setShareProgress] = useState(true);
   const [publicProfile, setPublicProfile] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  
+  // États pour l'utilisateur connecté
+  const [currentUser, setCurrentUser] = useState(null);
+  const [userName, setUserName] = useState('Étudiant');
+  const [userEmail, setUserEmail] = useState('');
+  const [loading, setLoading] = useState(true);
 
-  // Nom de l'étudiant connecté (à remplacer par les données Supabase plus tard)
-  const studentName = "Jean-Paul Moreau";
-  const studentFirstName = studentName.split(' ')[0];
-  const studentLastName = studentName.split(' ')[1];
+  // Récupérer l'utilisateur connecté depuis Firebase
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser(user);
+        setUserEmail(user.email);
+        if (user.displayName) {
+          setUserName(user.displayName);
+        } else {
+          const emailName = user.email.split('@')[0];
+          setUserName(emailName.replace(/[.-]/g, ' '));
+        }
+      } else {
+        window.location.href = '/connexion';
+      }
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  // Fermer le menu utilisateur quand on clique ailleurs
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showUserMenu && !event.target.closest('.user-menu-container')) {
+        setShowUserMenu(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [showUserMenu]);
+
+  // Fonction de déconnexion
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      window.location.href = '/connexion';
+    } catch (error) {
+      console.error('Erreur de déconnexion:', error);
+    }
+  };
+
+  // Mettre à jour le profil
+  const updateUserProfile = async (newName) => {
+    try {
+      await updateProfile(auth.currentUser, { displayName: newName });
+      setUserName(newName);
+      // alert('✅ Profil mis à jour avec succès !');
+    } catch (error) {
+      console.error('Erreur mise à jour:', error);
+      // alert('❌ Erreur lors de la mise à jour');
+    }
+  };
+
+  // Extraire les initiales pour l'avatar
+  const getUserInitials = () => {
+    const names = userName.split(' ');
+    if (names.length === 1) {
+      return names[0].charAt(0).toUpperCase();
+    }
+    return (names[0].charAt(0) + names[names.length - 1].charAt(0)).toUpperCase();
+  };
+
+  const studentFirstName = userName.split(' ')[0] || userName;
+
+  if (loading) {
+    return (
+      <div className="loading-screen">
+        <div className="spinner"></div>
+        <p>Chargement de votre tableau de bord...</p>
+      </div>
+    );
+  }
 
   const courses = [
     { id: 1, title: "Mathématiques Avancées", chapter: "Chapitre 4 - Algèbre linéaire", progress: 75, lessons: 12, subject: "math", cover: "math-bg", teacher: "Professeur Marie Pierre" },
@@ -78,23 +155,67 @@ const DashboardEtudiant = () => {
         </div>
         
         <nav className="main-nav">
-          <a href="#" onClick={() => setActiveTab('dashboard')} className={activeTab === 'dashboard' ? 'active' : ''}>🏠 Dashboard</a>
-          <a href="#" onClick={() => setActiveTab('courses')} className={activeTab === 'courses' ? 'active' : ''}>📚 Mes cours</a>
-
-          {/* <a href="#" onClick={() => setActiveTab('profile')} className={activeTab === 'profile' ? 'active' : ''}>👤 Profil</a> */}
-          
-          <a href="#" onClick={() => setActiveTab('grades')} className={activeTab === 'grades' ? 'active' : ''}>🎓 Grades</a>
-          <a href="#" onClick={() => setActiveTab('settings')} className={activeTab === 'settings' ? 'active' : ''}>⚙️ Paramètres</a>
+          <a href="#" onClick={() => { setActiveTab('dashboard'); setShowUserMenu(false); }} className={activeTab === 'dashboard' ? 'active' : ''}>🏠 Dashboard</a>
+          <a href="#" onClick={() => { setActiveTab('courses'); setShowUserMenu(false); }} className={activeTab === 'courses' ? 'active' : ''}>📚 Mes cours</a>
+          <a href="#" onClick={() => { setActiveTab('grades'); setShowUserMenu(false); }} className={activeTab === 'grades' ? 'active' : ''}>🎓 Grades</a>
+          <a href="#" onClick={() => { setActiveTab('settings'); setShowUserMenu(false); }} className={activeTab === 'settings' ? 'active' : ''}>⚙️ Paramètres</a>
         </nav>
         
         <div className="header-right">
           <div className="notifications-dropdown">
             <button className="notif-btn">🔔 <span className="notif-count">4</span></button>
           </div>
-          <a href="#" onClick={() => setActiveTab('profile')} className="user-avatar">
-            <span>👨‍🎓</span>
-            <span className="user-name">{studentName}</span>
-          </a>
+          
+          {/* MENU UTILISATEUR AVEC AVATAR */}
+          <div className="user-menu-container">
+            <button 
+              className="user-avatar-btn"
+              onClick={() => setShowUserMenu(!showUserMenu)}
+            >
+              <div className="user-avatar-initials">
+                {getUserInitials()}
+              </div>
+              <span className="user-name">{userName}</span>
+              <span className="dropdown-arrow">▼</span>
+            </button>
+            
+            {/* DROPDOWN MENU */}
+            {showUserMenu && (
+              <div className="user-dropdown">
+                <div className="dropdown-header">
+                  <div className="dropdown-avatar">
+                    {getUserInitials()}
+                  </div>
+                  <div className="dropdown-user-info">
+                    <div className="dropdown-user-name">{userName}</div>
+                    <div className="dropdown-user-email">{userEmail}</div>
+                  </div>
+                </div>
+                <div className="dropdown-divider"></div>
+                <div className="dropdown-menu-items">
+                  <button onClick={() => { setActiveTab('dashboard'); setShowUserMenu(false); }} className="dropdown-item">
+                    <span>🏠</span> Dashboard
+                  </button>
+                  <button onClick={() => { setActiveTab('courses'); setShowUserMenu(false); }} className="dropdown-item">
+                    <span>📚</span> Mes cours
+                  </button>
+                  <button onClick={() => { setActiveTab('grades'); setShowUserMenu(false); }} className="dropdown-item">
+                    <span>🎓</span> Grades
+                  </button>
+                  <button onClick={() => { setActiveTab('profile'); setShowUserMenu(false); }} className="dropdown-item">
+                    <span>👤</span> Mon profil
+                  </button>
+                  <button onClick={() => { setActiveTab('settings'); setShowUserMenu(false); }} className="dropdown-item">
+                    <span>⚙️</span> Paramètres
+                  </button>
+                </div>
+                <div className="dropdown-divider"></div>
+                <button onClick={handleLogout} className="dropdown-item logout">
+                  <span>🚪</span> Se déconnecter
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </header>
 
@@ -104,7 +225,6 @@ const DashboardEtudiant = () => {
         {/* DASHBOARD TAB */}
         {activeTab === 'dashboard' && (
           <>
-            {/* Bannière de bienvenue */}
             <section className="welcome-banner">
               <div className="welcome-text">
                 <div className="greeting">
@@ -129,9 +249,7 @@ const DashboardEtudiant = () => {
               </div>
             </section>
 
-            {/* DISPOSITION: GAUCHE + DROITE */}
             <div className="two-columns">
-              {/* COLONNE DE GAUCHE */}
               <div className="left-column">
                 <div className="section actualites-section">
                   <div className="section-header"><h2>📢 Actualités & Devoirs</h2><span className="badge-new">Nouveau</span></div>
@@ -175,7 +293,6 @@ const DashboardEtudiant = () => {
                 </div>
               </div>
 
-              {/* COLONNE DE DROITE - MES COURS */}
               <div className="right-column">
                 <div className="section courses-section-full">
                   <div className="section-header">
@@ -252,11 +369,11 @@ const DashboardEtudiant = () => {
             <div className="profile-header-card">
               <div className="profile-cover"></div>
               <div className="profile-info">
-                <div className="profile-avatar-large">👨‍🎓</div>
-                <h1>{studentName}</h1>
-                <p className="profile-email">jeanpaul.moreau@eduhaiti.com</p>
+                <div className="profile-avatar-large">{getUserInitials()}</div>
+                <h1>{userName}</h1>
+                <p className="profile-email">{userEmail}</p>
                 <div className="profile-badges">
-                  <span className="badge">📅 Membre depuis Janvier 2025</span>
+                  <span className="badge">📅 Membre depuis {new Date(currentUser?.metadata?.creationTime).toLocaleDateString('fr-FR')}</span>
                   <span className="badge">🎓 342 points</span>
                   <span className="badge">⭐ Niveau 4</span>
                 </div>
@@ -272,10 +389,35 @@ const DashboardEtudiant = () => {
 
             <div className="profile-section">
               <h2>📋 Informations personnelles</h2>
-              <div className="form-row"><div className="form-group"><label>Nom complet</label><input type="text" defaultValue={studentName} /></div><div className="form-group"><label>Date de naissance</label><input type="date" defaultValue="2005-03-15" /></div></div>
-              <div className="form-row"><div className="form-group"><label>Email</label><input type="email" defaultValue="jeanpaul.moreau@eduhaiti.com" /></div><div className="form-group"><label>Téléphone</label><input type="tel" defaultValue="+509 1234 5678" /></div></div>
-              <div className="form-group"><label>Adresse</label><input type="text" defaultValue="Port-au-Prince, Haïti" /></div>
-              <button className="btn-primary">💾 Mettre à jour</button>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Nom complet</label>
+                  <input type="text" id="fullName" defaultValue={userName} />
+                </div>
+                <div className="form-group">
+                  <label>Date de naissance</label>
+                  <input type="date" defaultValue="2005-03-15" />
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Email</label>
+                  <input type="email" defaultValue={userEmail} disabled style={{ backgroundColor: '#f0f0f0', cursor: 'not-allowed' }} />
+                  <small style={{ color: '#666' }}>L'email ne peut pas être modifié</small>
+                </div>
+                <div className="form-group">
+                  <label>Téléphone</label>
+                  <input type="tel" defaultValue="+509 1234 5678" />
+                </div>
+              </div>
+              <div className="form-group">
+                <label>Adresse</label>
+                <input type="text" defaultValue="Port-au-Prince, Haïti" />
+              </div>
+              <button className="btn-primary" onClick={() => {
+                const newName = document.getElementById('fullName').value;
+                updateUserProfile(newName);
+              }}>💾 Mettre à jour</button>
             </div>
 
             <div className="profile-section">
@@ -325,7 +467,7 @@ const DashboardEtudiant = () => {
             <h1>⚙️ Paramètres</h1>
             <div className="settings-section">
               <h2>🔔 Notifications</h2>
-              <div className="setting-item"><div className="setting-info"><span>Notifications par email</span><p>Recevez des alertes pour les nouveaux cours et quiz</p></div><label className="switch"><input type="checkbox" checked={emailNotifications} onChange={(e) => setEmailNotifications(e.target.checked)} /><span className="slider round"></span></label></div>
+              <div className="setting-item"><div className="setting-info"><span>Notifications par email</span><p>Recevez des // alertes pour les nouveaux cours et quiz</p></div><label className="switch"><input type="checkbox" checked={emailNotifications} onChange={(e) => setEmailNotifications(e.target.checked)} /><span className="slider round"></span></label></div>
               <div className="setting-item"><div className="setting-info"><span>Rappels de quiz</span><p>Recevez un rappel 24h avant chaque quiz</p></div><label className="switch"><input type="checkbox" checked={quizReminders} onChange={(e) => setQuizReminders(e.target.checked)} /><span className="slider round"></span></label></div>
               <div className="setting-item"><div className="setting-info"><span>Newsletter pédagogique</span><p>Recevez des conseils et ressources éducatives</p></div><label className="switch"><input type="checkbox" checked={newsletter} onChange={(e) => setNewsletter(e.target.checked)} /><span className="slider round"></span></label></div>
             </div>

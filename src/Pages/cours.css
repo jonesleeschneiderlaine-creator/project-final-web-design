@@ -1,0 +1,334 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.cours-container {
+    background: #f5f7fb;
+    min-height: 100vh;
+}
+
+/* ========== NAVBAR ========== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    background: #0b1f3a;
+    color: white;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar nav a {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.navbar nav a:hover,
+.navbar nav a.active {
+    color: #f39c12;
+}
+
+.auth {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.login {
+    background: #e74c3c;
+    color: white;
+}
+
+.login:hover {
+    background: #c0392b;
+    transform: scale(1.02);
+}
+
+.register {
+    background: #2ecc71;
+    color: white;
+}
+
+.register:hover {
+    background: #27ae60;
+    transform: scale(1.02);
+}
+
+/* ========== BANNER ========== */
+.banner {
+    background: linear-gradient(135deg, #0b1f3a, #0f4c81);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.banner h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.banner p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* ========== FILTRES ========== */
+.filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 30px 20px;
+    background: white;
+    border-bottom: 1px solid #eef2f7;
+}
+
+.filter-btn {
+    padding: 10px 24px;
+    border: 2px solid #e1e5eb;
+    border-radius: 30px;
+    background: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.filter-btn:hover {
+    border-color: #1e6bd6;
+    color: #1e6bd6;
+}
+
+.filter-btn.active {
+    background: #1e6bd6;
+    border-color: #1e6bd6;
+    color: white;
+}
+
+/* ========== COURSES LIST ========== */
+.courses-list {
+    padding: 50px 60px;
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.course-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+.course-img {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+}
+
+.math-img {
+    background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=200&fit=crop');
+}
+.math-img2 {
+    background-image: url('https://images.unsplash.com/photo-1509228468518-180dd4864904?w=400&h=200&fit=crop');
+}
+.french-img {
+    background-image: url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=200&fit=crop');
+}
+.french-img2 {
+    background-image: url('https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=200&fit=crop');
+}
+.science-img {
+    background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=200&fit=crop');
+}
+.science-img2 {
+    background-image: url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=400&h=200&fit=crop');
+}
+.history-img {
+    background-image: url('https://images.unsplash.com/photo-1542224566-6e7a2e464d0d?w=400&h=200&fit=crop');
+}
+.history-img2 {
+    background-image: url('https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?w=400&h=200&fit=crop');
+}
+.it-img {
+    background-image: url('https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=400&h=200&fit=crop');
+}
+.it-img2 {
+    background-image: url('https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400&h=200&fit=crop');
+}
+
+.course-category {
+    display: inline-block;
+    background: #eef2ff;
+    color: #1e6bd6;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin: 15px 0 10px 20px;
+}
+
+.course-card h3 {
+    margin: 0 20px 10px;
+    color: #0b1f3a;
+    font-size: 1.2rem;
+}
+
+.course-card p {
+    margin: 0 20px 15px;
+    color: #666;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.course-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eef2f7;
+    color: #888;
+    font-size: 0.8rem;
+}
+
+.course-btn {
+    margin: 0 20px 20px;
+    width: calc(100% - 40px);
+    padding: 12px;
+    background: #1e6bd6;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.course-btn:hover {
+    background: #0f4c81;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+    background: #0b1f3a;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 40px 60px;
+    margin-top: 50px;
+}
+
+.footer-left h3 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.footer-left p {
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+/* ========== NOUVELLES IMAGES POUR LANGUES ========== */
+.english-img {
+    background-image: url('https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=400&h=200&fit=crop');
+}
+.english-img2 {
+    background-image: url('https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=400&h=200&fit=crop');
+}
+.creole-img {
+    background-image: url('https://images.unsplash.com/photo-1523805009347-7448845a9e53?w=400&h=200&fit=crop');
+}
+.creole-img2 {
+    background-image: url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&h=200&fit=crop');
+}
+
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 20px;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .navbar nav a {
+        margin: 0 10px;
+    }
+    
+    .banner h1 {
+        font-size: 1.8rem;
+    }
+    
+    .filters {
+        padding: 20px;
+    }
+    
+    .filter-btn {
+        padding: 6px 16px;
+        font-size: 0.8rem;
+    }
+    
+    .courses-list {
+        padding: 30px 20px;
+    }
+    
+    .footer {
+        padding: 30px 25px;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .footer-links {
+        justify-content: center;
+    }
+}
